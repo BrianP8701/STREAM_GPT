@@ -1,3 +1,4 @@
 local-test-grounds/local-llmkb/
 backend/google-cloud-sdk/
 langchain_learning/learninglangchain_new/
+llm_inference/

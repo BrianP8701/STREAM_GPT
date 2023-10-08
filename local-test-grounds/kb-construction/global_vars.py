@@ -1,0 +1,6 @@
+OPENAI_API_KEY='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'
+
+# Fast time: 20.31137990951538 seconds
+# Slow time: 1743.078387260437 seconds
+
+# 1743.078387260437 / 20.31137990951538 = 85.8x speedup

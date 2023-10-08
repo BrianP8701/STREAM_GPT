@@ -1,0 +1,559 @@
+CHAPTER 6. DEEP FEEDFORWARD NETWORKS
+
+can cause similar difficulties for learning if the loss function is not designed to
+compensate for it.
+
+The argument z to the softmax function can be produced in two different ways.
+The most common is simply to have an earlier layer of the neural network output
+every element of z, as described above using the linear layer z = W 'h+b. While
+straightforward, this approach actually overparametrizes the distribution. The
+constraint that the n outputs must sum to 1 means that only n —1 parameters are
+necessary; the probability of the n-th value may be obtained by subtracting the
+first n— 1 probabilities from 1. We can thus impose a requirement that one element
+of z be fixed. For example, we can require that z, = 0. Indeed, this is exactly
+what the sigmoid unit does. Defining P(y=1 | «) = o(z) is equivalent to defining
+P(y=1| x) = softmax(z): with a two-dimensional z and z = 0. Both the n—1
+argument and the n argument approaches to the softmax can describe the same
+set of probability distributions, but have different learning dynamics. In practice,
+there is rarely much difference between using the overparametrized version or the
+restricted version, and it is simpler to implement the overparametrized version.
+
+From a neuroscientific point of view, it is interesting to think of the softmax as
+a way to create a form of competition between the units that participate in it: the
+softmax outputs always sum to | so an increase in the value of one unit necessarily
+corresponds to a decrease in the value of others. This is analogous to the lateral
+inhibition that is believed to exist between nearby neurons in the cortex. At the
+extreme (when the difference between the maximal a; and the others is large in
+magnitude) it becomes a form of winner-take-all (one of the outputs is nearly 1
+and the others are nearly 0).
+
+The name “softmax” can be somewhat confusing. The function is more closely
+related to the arg max function than the max function. The term “soft” derives
+from the fact that the softmax function is continuous and differentiable. The
+arg max function, with its result represented as a one-hot vector, is not continuous
+or differentiable. The softmax function thus provides a “softened” version of the
+arg max. The corresponding soft version of the maximum function is softmax(z) ' z.
+It would perhaps be better to call the softmax function “softargmax,” but the
+current name is an entrenched convention.
+
+6.2.2.4 Other Output Types
+
+The linear, sigmoid, and softmax output units described above are the most
+common. Neural networks can generalize to almost any kind of output layer that
+we wish. The principle of maximum likelihood provides a guide for how to design
+
+187
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+indexing_system_message = 'You will be presented with chunks from a large text corpus, along with user instructions on how to construct 
+                            a knowledge graph. Later you will use this graph to retrieve context and help the user. Your task is to provide 
+                            a meticulous description for any piece of relevant information that might be important. The user wants you to 
+                            construct the knowledge graph with this in mind: '
+indexing_function = [{
+        'name': 'construct_kg', 
+        'description': 'Construct knowledge graph from indexed text', 
+        'parameters': {
+            'type': 'object', 
+            'properties': {
+                'indexed_text': {
+                    'type': 'array', 
+                    'items': {
+                        'type': "object",
+                        'properties': {
+                            'bullet point': { 
+                                'type': "string", 
+                                'description': "Comprehensive, concise description" },
+                        }
+                    }
+                }
+            }, 
+            'required': ['indexed_text']
+        }
+ }]
+{
+  "indexed_text": [
+    {
+      "name": "Deep Feedforward Networks"
+    },
+    {
+      "name": "softmax function"
+    },
+    {
+      "name": "overparametrized version"
+    },
+    {
+      "name": "neuroscientific point of view"
+    },
+    {
+      "name": "lateral inhibition"
+    },
+    {
+      "name": "arg max function"
+    },
+    {
+      "name": "softargmax"
+    },
+    {
+      "name": "output layer"
+    },
+    {
+      "name": "maximum likelihood"
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+indexing_system_message2 = 'Create a list with the main ideas in the text.'
+indexing_function2 = [{
+        'name': 'construct_list', 
+        'description': 'Make a list of main ideas', 
+        'parameters': {
+            'type': 'object', 
+            'properties': {
+                'indexed_text': {
+                    'type': 'array', 
+                    'items': {
+                        'type': "object",
+                        'properties': {
+                            'idea': { 
+                                'type': "string", 
+                                'description': "Comprehensive yet concise description" },
+                        }
+                    }
+                }
+            }, 
+            'required': ['indexed_text']
+        }
+ }]
+ {
+  "indexed_text": [
+    {
+      "idea": "The softmax function is commonly used in deep feedforward networks to produce the probability distribution over a set of possible outputs."
+    },
+    {
+      "idea": "There are two different ways to produce the argument z to the softmax function: 1) have an earlier layer of the neural network output every element of z, or 2) impose a requirement that one element of z be fixed (e.g., z, = 0)."
+    },
+    {
+      "idea": "The overparametrized version and the restricted version of the softmax can describe the same set of probability distributions, but have different learning dynamics."
+    },
+    {
+      "idea": "The softmax function creates a form of competition between the units that participate in it. An increase in the value of one unit corresponds to a decrease in the value of others."
+    },
+    {
+      "idea": "The softmax function is more closely related to the arg max function than the max function. It provides a \"softened\" version of the arg max."
+    },
+    {
+      "idea": "Neural networks can generalize to almost any kind of output layer, not just the linear, sigmoid, and softmax units."
+    },
+    {
+      "idea": "The principle of maximum likelihood guides the design of output layers in neural networks."
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+indexing_system_message3 = 'Create a list with the main ideas focused on in this piece of text'
+indexing_function3 = [{
+        'name': 'construct_list', 
+        'description': 'Make a list of main ideas', 
+        'parameters': {
+            'type': 'object', 
+            'properties': {
+                'indexed_text': {
+                    'type': 'array', 
+                    'items': {
+                        'type': "object",
+                        'properties': {
+                            'idea': { 
+                                'type': "string", 
+                                'description': "Comprehensive yet concise description" },
+                        }
+                    }
+                }
+            }, 
+            'required': ['indexed_text']
+        }
+ }]
+ {
+  "indexed_text": [
+    {
+      "idea": "The softmax function is commonly used as the output layer in deep feedforward networks."
+    },
+    {
+      "idea": "The argument to the softmax function can be produced in two different ways, either with an earlier layer of the network or by imposing constraints on the parameters."
+    },
+    {
+      "idea": "The overparametrized and restricted versions of the softmax function have different learning dynamics."
+    },
+    {
+      "idea": "The softmax function creates competition between the units that participate in it, similar to lateral inhibition in the cortex."
+    },
+    {
+      "idea": "The softmax function is continuous and differentiable, unlike the arg max function."
+    },
+    {
+      "idea": "Neural networks can have different types of output layers based on the desired outcome."
+    },
+    {
+      "idea": "The principle of maximum likelihood guides the design of output layers."
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+indexing_system_message4 = 'Create a list with the main ideas focused on in this page. Keep track of ideas that might be relevant next page.'
+indexing_function4 = [{
+        'name': 'construct_list', 
+        'description': 'Make a list of main ideas', 
+        'parameters': {
+            'type': 'object', 
+            'properties': {
+                'indexed_text': {
+                    'type': 'array', 
+                    'items': {
+                        'type': "object",
+                        'properties': {
+                            'idea': { 
+                                'type': "string", 
+                                'description': "Comprehensive yet concise description" },
+                        }
+                    }
+                },
+                'next_page': {
+                    'type': 'string',
+                    'description': 'Relevant ideas for next page'
+                }
+            }, 
+            'required': ['indexed_text', 'next_page']
+        }
+ }]
+ {
+  "indexed_text": [
+    {"idea": "Different ways to produce the argument z for the softmax function"},
+    {"idea": "Overparametrized version vs restricted version of the softmax"},
+    {"idea": "Neuroscientific interpretation of the softmax function"},
+    {"idea": "Relationship between softmax and arg max functions"},
+    {"idea": "Other types of output units in neural networks"},
+    {"idea": "Principle of maximum likelihood as a guide for designing output layers"}
+  ],
+  "next_page": "Chapter 6.3 - Hidden Units"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+indexing_system_message5 = 'Create a list with the main ideas focused on in this page. Write a concise summary of relevant ideas for next page.'
+indexing_function5 = [{
+        'name': 'construct_list', 
+        'description': 'Make a list of main ideas', 
+        'parameters': {
+            'type': 'object', 
+            'properties': {
+                'indexed_text': {
+                    'type': 'array', 
+                    'items': {
+                        'type': "object",
+                        'properties': {
+                            'idea': { 
+                                'type': "string", 
+                                'description': "Comprehensive yet concise description" },
+                        }
+                    }
+                },
+                'summary_for_next_page': {
+                    'type': 'string',
+                    'description': 'Concise summary of relevant ideas for next page'
+                }
+            }, 
+            'required': ['indexed_text', 'summary_for_next_page']
+        }
+ }]
+ {
+  "indexed_text": [
+    {
+      "idea": "The softmax function can be produced in two different ways: by having an earlier layer of the neural network output every element of z or by imposing a requirement that one element of z be fixed."
+    },
+    {
+      "idea": "The overparametrized version and the restricted version of the softmax function can describe the same set of probability distributions but have different learning dynamics."
+    },
+    {
+      "idea": "The softmax function creates competition between the units that participate in it, similar to lateral inhibition between nearby neurons in the cortex."
+    },
+    {
+      "idea": "The softmax function is more closely related to the arg max function than the max function. It provides a softened version of the arg max."
+    },
+    {
+      "idea": "Neural networks can generalize to almost any kind of output layer, guided by the principle of maximum likelihood."
+    }
+  ],
+  "summary_for_next_page": "This section discusses the softmax function and its different approaches, the competition it creates between units, and the possibility of using other output types in neural networks."
+ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+indexing_system_message = 'Create a list with the main ideas focused on in this page. Ideas not fully explained in this page should be saved for the next page.'
+indexing_function = [{
+        'name': 'construct_list', 
+        'description': 'Make a list of main ideas', 
+        'parameters': {
+            'type': 'object', 
+            'properties': {
+                'indexed_text': {
+                    'type': 'array', 
+                    'items': {
+                        'type': "object",
+                        'properties': {
+                            'idea': { 
+                                'type': "string", 
+                                'description': "Comprehensive yet concise description" },
+                        }
+                    }
+                },
+                'summary_for_next_page': {
+                    'type': 'string',
+                    'description': 'Concise summary of relevant ideas not finished in this page'
+                }
+            }, 
+            'required': ['indexed_text', 'summary_for_next_page']
+        }
+ }]
+ {
+  "indexed_text": [
+    {
+      "idea": "Softmax function overparametrizes the distribution"
+    },
+    {
+      "idea": "Constraint that the outputs must sum to 1"
+    },
+    {
+      "idea": "Different approaches to producing the argument z for the softmax function"
+    },
+    {
+      "idea": "Neuroscientific perspective on softmax as a form of competition between units"
+    },
+    {
+      "idea": "Relationship between softmax and arg max functions"
+    },
+    {
+      "idea": "Other types of output units in neural networks"
+    },
+    {
+      "idea": "Principle of maximum likelihood as a guide for designing output layers"
+    }
+  ],
+  "summary_for_next_page": "The next page will discuss other types of activation functions and their properties."
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+indexing_system_message = 'Create list with main ideas focused on in this page. Include summary of main ideas that will be focused on in the next page.'
+indexing_function = [{
+        'name': 'construct_list', 
+        'description': 'Make a list of main ideas', 
+        'parameters': {
+            'type': 'object', 
+            'properties': {
+                'indexed_text': {
+                    'type': 'array', 
+                    'items': {
+                        'type': "object",
+                        'properties': {
+                            'idea': { 
+                                'type': "string", 
+                                'description': "Comprehensive yet concise description" },
+                        }
+                    }
+                },
+                'summary_for_next_page': {
+                    'type': 'string',
+                    'description': 'Relevant ideas for next page'
+                }
+            }, 
+            'required': ['indexed_text', 'summary_for_next_page']
+        }
+ }]
+ {
+  "indexed_text": [
+    {
+      "idea": "Loss function design for deep feedforward networks"
+    },
+    {
+      "idea": "Two ways to produce the argument z for the softmax function"
+    },
+    {
+      "idea": "Overparametrized and restricted versions of the softmax function"
+    },
+    {
+      "idea": "Neuroscientific perspective on softmax as a form of competition"
+    },
+    {
+      "idea": "Relationship between softmax and arg max functions"
+    },
+    {
+      "idea": "Other types of output units in neural networks"
+    },
+    {
+      "idea": "Principle of maximum likelihood as a guide for output layer design"
+    }
+  ],
+  "summary_for_next_page": "The next page will discuss the principle of maximum likelihood in more detail and provide examples of different types of output units in neural networks."
+}

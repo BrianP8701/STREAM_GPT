@@ -1,0 +1,1 @@
+summarization_system_message = 'Summarize the main ideas'

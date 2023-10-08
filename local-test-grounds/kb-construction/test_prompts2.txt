@@ -1,0 +1,488 @@
+CHAPTER 5. MACHINE LEARNING BASICS
+
+Another type of learning algorithm that also breaks the input space into regions
+and has separate parameters for each region is the decision tree (Breiman et al.,
+1984) and its many variants. As shown in figure 5.7, each node of the decision
+tree is associated with a region in the input space, and internal nodes break that
+region into one sub-region for each child of the node (typically using an axis-aligned
+cut). Space is thus sub-divided into non-overlapping regions, with a one-to-one
+correspondence between leaf nodes and input regions. Each leaf node usually maps
+every point in its input region to the same output. Decision trees are usually
+trained with specialized algorithms that are beyond the scope of this book. The
+learning algorithm can be considered non-parametric if it is allowed to learn a tree
+of arbitrary size, though decision trees are usually regularized with size constraints
+that turn them into parametric models in practice. Decision trees as they are
+typically used, with axis-aligned splits and constant outputs within each node,
+struggle to solve some problems that are easy even for logistic regression. For
+example, if we have a two-class problem and the positive class occurs wherever
+x2 > a1, the decision boundary is not axis-aligned. The decision tree will thus
+need to approximate the decision boundary with many nodes, implementing a step
+function that constantly walks back and forth across the true decision function
+with axis-aligned steps.
+
+As we have seen, nearest neighbor predictors and decision trees have many
+limitations. Nonetheless, they are useful learning algorithms when computational
+resources are constrained. We can also build intuition for more sophisticated
+learning algorithms by thinking about the similarities and differences between
+sophisticated algorithms and k-NN or decision tree baselines.
+
+See Murphy (2012), Bishop (2006), Hastie et al. (2001) or other machine
+learning textbooks for more material on traditional supervised learning algorithms.
+
+5.8 Unsupervised Learning Algorithms
+
+Recall from section 5.1.3 that unsupervised algorithms are those that experience
+only “features” but not a supervision signal. The distinction between supervised
+and unsupervised algorithms is not formally and rigidly defined because there is no
+objective test for distinguishing whether a value is a feature or a target provided by
+a supervisor. Informally, unsupervised learning refers to most attempts to extract
+information from a distribution that do not require human labor to annotate
+examples. The term is usually associated with density estimation, learning to
+draw samples from a distribution, learning to denoise data from some distribution,
+finding a manifold that the data lies near, or clustering the data into groups of
+
+146
+ CHAPTER 5. MACHINE LEARNING BASICS
+
+related examples.
+
+A classic unsupervised learning task is to find the “best” representation of the
+data. By ‘best’ we can mean different things, but generally speaking we are looking
+for a representation that preserves as much information about x as possible while
+obeying some penalty or constraint aimed at keeping the representation simpler or
+more accessible than 2 itself.
+
+There are multiple ways of defining a simpler representation. Three of the
+most common include lower dimensional representations, sparse representations
+and independent representations. Low-dimensional representations attempt to
+compress as much information about x as possible in a smaller representation.
+Sparse representations (Barlow, 1989; Olshausen and Field, 1996; Hinton and
+Ghahramani, 1997) embed the dataset into a representation whose entries are
+mostly zeroes for most inputs. The use of sparse representations typically requires
+increasing the dimensionality of the representation, so that the representation
+becoming mostly zeroes does not discard too much information. This results in an
+overall structure of the representation that tends to distribute data along the axes
+of the representation space. Independent representations attempt to disentangle
+the sources of variation underlying the data distribution such that the dimensions
+of the representation are statistically independent.
+
+Of course these three criteria are certainly not mutually exclusive. Low-
+dimensional representations often yield elements that have fewer or weaker de-
+pendencies than the original high-dimensional data. This is because one way to
+reduce the size of a representation is to find and remove redundancies. Identifying
+and removing more redundancy allows the dimensionality reduction algorithm to
+achieve more compression while discarding less information.
+
+The notion of representation is one of the central themes of deep learning and
+therefore one of the central themes in this book. In this section, we develop some
+simple examples of representation learning algorithms. Together, these example
+algorithms show how to operationalize all three of the criteria above. Most of the
+remaining chapters introduce additional representation learning algorithms that
+develop these criteria in different ways or introduce other criteria.
+
+5.8.1 Principal Components Analysis
+
+In section 2.12, we saw that the principal components analysis algorithm provides
+a means of compressing data. We can also view PCA as an unsupervised learning
+algorithm that learns a representation of data. This representation is based on
+two of the criteria for a simple representation described above. PCA learns a
+
+147
+ CHAPTER 5. MACHINE LEARNING BASICS
+
+—20 —-10 0 10 20
+
+Figure 5.8: PCA learns a linear projection that aligns the direction of greatest variance
+with the axes of the new space. (Left)The original data consists of samples of x. In this
+space, the variance might occur along directions that are not axis-aligned. (Right)The
+transformed data z= 2! W now varies most along the axis z;. The direction of second
+most variance is now along 22.
+
+representation that has lower dimensionality than the original input. It also learns
+a representation whose elements have no linear correlation with each other. This
+is a first step toward the criterion of learning representations whose elements are
+statistically independent. To achieve full independence, a representation learning
+algorithm must also remove the nonlinear relationships between variables.
+
+PCA learns an orthogonal, linear transformation of the data that projects an
+input z to a representation z as shown in figure 5.8. In section 2.12, we saw that
+we could learn a one-dimensional representation that best reconstructs the original
+data (in the sense of mean squared error) and that this representation actually
+corresponds to the first principal component of the data. Thus we can use PCA
+as a simple and effective dimensionality reduction method that preserves as much
+of the information in the data as possible (again, as measured by least-squares
+reconstruction error). In the following, we will study how the PCA representation
+decorrelates the original data representation X.
+
+Let us consider the m x n-dimensional design matrix X. We will assume that
+the data has a mean of zero, E[a] = 0. If this is not the case, the data can easily
+be centered by subtracting the mean from all examples in a preprocessing step.
+
+The unbiased sample covariance matrix associated with X is given by:
+1 T
+
+148
+ CHAPTER 5. MACHINE LEARNING BASICS
+
+PCA finds a representation (through linear transformation) z = «'W where
+Var[z] is diagonal.
+
+In section 2.12, we saw that the principal components of a design matrix X
+are given by the eigenvectors of X'X. From this view,
+
+X'X=WAW'. (5.86)
+
+In this section, we exploit an alternative derivation of the principal components. The
+principal components may also be obtained via the singular value decomposition.
+Specifically, they are the right singular vectors of X. To see this, let W be the
+right singular vectors in the decomposition X =U%SW'. We then recover the
+original eigenvector equation with W as the eigenvector basis:
+
+;
+X'X= (U=w") U=W! =w>?w'. (5.87)
+
+The SVD is helpful to show that PCA results in a diagonal Var [z]. Using the
+SVD of X, we can express the variance of X as:
+
+Var[a] = —*_x'x (5.88)
+1
+= —— (USW")'U=w" (5.89)
+1
+= ——_ws'u'u=w! (5.90)
+m—-1
+_ 1 2 T
+=——wr'w', (5.91)
+
+where we use the fact that U'U = I because the U matrix of the singular value
+decomposition is defined to be orthogonal. This shows that if we take z = 2! W,
+we can ensure that the covariance of z is diagonal as required:
+
+Var[z] = Zz (5.92)
+-~_1 _wix'xw (5.93)
+m-—-1
+- | _wiwsew'w (5.94)
+m-—-1
+— tye
+=——»’, (5.95)
+
+where this time we use the fact that W'W =I, again from the definition of the
+SVD.
+
+149
+ CHAPTER 5. MACHINE LEARNING BASICS
+
+The above analysis shows that when we project the data x to z, via the linear
+transformation W, the resulting representation has a diagonal covariance matrix
+(as given by ©?) which immediately implies that the individual elements of z are
+mutually uncorrelated.
+
+This ability of PCA to transform data into a representation where the elements
+are mutually uncorrelated is a very important property of PCA. It is a simple
+example of a representation that attempts to disentangle the unknown factors of
+variation underlying the data. In the case of PCA, this disentangling takes the
+form of finding a rotation of the input space (described by W) that aligns the
+principal axes of variance with the basis of the new representation space associated
+with z.
+
+While correlation is an important category of dependency between elements of
+the data, we are also interested in learning representations that disentangle more
+complicated forms of feature dependencies. For this, we will need more than what
+can be done with a simple linear transformation.
+
+5.8.2 k-means Clustering
+
+Another example of a simple representation learning algorithm is k-means clustering.
+The k-means clustering algorithm divides the training set into k different clusters
+of examples that are near each other. We can thus think of the algorithm as
+providing a k-dimensional one-hot code vector h representing an input x. If x
+belongs to cluster 7, then h; = 1 and all other entries of the representation h are
+Zero.
+
+The one-hot code provided by kmeans clustering is an example of a sparse
+representation, because the majority of its entries are zero for every input. Later,
+we will develop other algorithms that learn more flexible sparse representations,
+where more than one entry can be non-zero for each input x. One-hot codes
+are an extreme example of sparse representations that lose many of the benefits
+of a distributed representation. The one-hot code still confers some statistical
+advantages (it naturally conveys the idea that all examples in the same cluster are
+similar to each other) and it confers the computational advantage that the entire
+representation may be captured by a single integer.
+
+The k-means algorithm works by initializing k different centroids { po, eng py
+to different values, then alternating between two different steps until convergence.
+In one step, each training example is assigned to cluster 7, where? is the index of
+the nearest centroid w. In the other step, each centroid 2 is updated to the
+mean of all training examples «) assigned to cluster i.
+
+150
+ CHAPTER 5. MACHINE LEARNING BASICS
+
+One difficulty pertaining to clustering is that the clustering problem is inherently
+ill-posed, in the sense that there is no single criterion that measures how well a
+clustering of the data corresponds to the real world. We can measure properties of
+the clustering such as the average Euclidean distance from a cluster centroid to the
+members of the cluster. This allows us to tell how well we are able to reconstruct
+the training data from the cluster assignments. We do not know how well the
+cluster assignments correspond to properties of the real world. Moreover, there
+may be many different clusterings that all correspond well to some property of
+the real world. We may hope to find a clustering that relates to one feature but
+obtain a different, equally valid clustering that is not relevant to our task. For
+example, suppose that we run two clustering algorithms on a dataset consisting of
+images of red trucks, images of red cars, images of gray trucks, and images of gray
+cars. If we ask each clustering algorithm to find two clusters, one algorithm may
+find a cluster of cars and a cluster of trucks, while another may find a cluster of
+red vehicles and a cluster of gray vehicles. Suppose we also run a third clustering
+algorithm, which is allowed to determine the number of clusters. This may assign
+the examples to four clusters, red cars, red trucks, gray cars, and gray trucks. This
+new clustering now at least captures information about both attributes, but it has
+lost information about similarity. Red cars are in a different cluster from gray
+cars, just as they are in a different cluster from gray trucks. The output of the
+clustering algorithm does not tell us that red cars are more similar to gray cars
+than they are to gray trucks. They are different from both things, and that is all
+we know.
+
+These issues illustrate some of the reasons that we may prefer a distributed
+representation to a one-hot representation. A distributed representation could have
+two attributes for each vehicle—one representing its color and one representing
+whether it is a car or a truck. It is still not entirely clear what the optimal
+distributed representation is (how can the learning algorithm know whether the
+two attributes we are interested in are color and car-versus-truck rather than
+manufacturer and age?) but having many attributes reduces the burden on the
+algorithm to guess which single attribute we care about, and allows us to measure
+similarity between objects in a fine-grained way by comparing many attributes
+instead of just testing whether one attribute matches.
+
+5.9 Stochastic Gradient Descent
+
+Nearly all of deep learning is powered by one very important algorithm: stochastic
+gradient descent or SGD. Stochastic gradient descent is an extension of the
+ CHAPTER 5. MACHINE LEARNING BASICS
+
+gradient descent algorithm introduced in section 4.3.
+
+A recurring problem in machine learning is that large training sets are necessary
+for good generalization, but large training sets are also more computationally
+expensive.
+
+The cost function used by a machine learning algorithm often decomposes as a
+sum over training examples of some per-example loss function. For example, the
+negative conditional log-likelihood of the training data can be written as
+
+1 m ; ;
+J(8) = Exy~ fase l(#,y,0) = — S 7 Le of, 8) (5.96)
+i=l
+
+where L is the per-example loss L(a, y,@) = — log p(y | a; 6).
+
+For these additive cost functions, gradient descent requires computing
+1 m
+VoJ(0) = —S~ VoL(x,y, 8). ;
+oJ(8) mo aL (a, y\, 8) (5.97)
+
+The computational cost of this operation is O(m). As the training set size grows to
+billions of examples, the time to take a single gradient step becomes prohibitively
+long.
+
+The insight of stochastic gradient descent is that the gradient is an expectation.
+The expectation may be approximately estimated using a small set of samples.
+Specifically, on each step of the algorithm, we can sample a minibatch of examples
+B= fa, Leey al’ )¥ drawn uniformly from the training set. The minibatch size
+m’! is typically chosen to be a relatively small number of examples, ranging from
+1 to a few hundred. Crucially, m’ is usually held fixed as the training set size m
+grows. We may fit a training set with billions of examples using updates computed
+on only a hundred examples.
+
+The estimate of the gradient is formed as
+
+9=—Vo>_ L(a,y,). (5.98)
+
+using examples from the minibatch B. The stochastic gradient descent algorithm
+then follows the estimated gradient downhill:
+
+0-0-4, (5.99)
+
+where € is the learning rate.
+ CHAPTER 5. MACHINE LEARNING BASICS
+
+Gradient descent in general has often been regarded as slow or unreliable. In
+the past, the application of gradient descent to non-convex optimization problems
+was regarded as foolhardy or unprincipled. Today, we know that the machine
+learning models described in part IJ work very well when trained with gradient
+descent. The optimization algorithm may not be guaranteed to arrive at even a
+local minimum in a reasonable amount of time, but it often finds a very low value
+of the cost function quickly enough to be useful.
+
+Stochastic gradient descent has many important uses outside the context of
+deep learning. It is the main way to train large linear models on very large
+datasets. For a fixed model size, the cost per SGD update does not depend on the
+training set size m. In practice, we often use a larger model as the training set size
+increases, but we are not forced to do so. The number of updates required to reach
+convergence usually increases with training set size. However, as m approaches
+infinity, the model will eventually converge to its best possible test error before
+SGD has sampled every example in the training set. Increasing m further will not
+extend the amount of training time needed to reach the model’s best possible test
+error. From this point of view, one can argue that the asymptotic cost of training
+a model with SGD is O(1) as a function of m.
+
+Prior to the advent of deep learning, the main way to learn nonlinear models
+was to use the kernel trick in combination with a linear model. Many kernel learning
+algorithms require constructing an m Xm matrix Gj jy = k(a®, x) ). Constructing
+this matrix has computational cost O(m), which is clearly undesirable for datasets
+with billions of examples. In academia, starting in 2006, deep learning was
+initially interesting because it was able to generalize to new examples better
+than competing algorithms when trained on medium-sized datasets with tens of
+thousands of examples. Soon after, deep learning garnered additional interest in
+industry, because it provided a scalable way of training nonlinear models on large
+datasets.
+
+Stochastic gradient descent and many enhancements to it are described further
+in chapter 8.
+
+5.10 Building a Machine Learning Algorithm
+
+Nearly all deep learning algorithms can be described as particular instances of
+a fairly simple recipe: combine a specification of a dataset, a cost function, an
+optimization procedure and a model.
+
+For example, the linear regression algorithm combines a dataset consisting of
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+indexing_system_message = 'Create a comprehensive list with all ideas discussed in this chunk.'
+indexing_function = [{
+        'name': 'construct_list', 
+        'description': 'Make a comprehensive list of ideas', 
+        'parameters': {
+            'type': 'object', 
+            'properties': {
+                'indexed_text': {
+                    'type': 'array', 
+                    'items': {
+                        'type': "object",
+                        'properties': {
+                            'idea': { 
+                                'type': "string", 
+                                'description': "Comprehensive yet concise description" },
+                        }
+                    }
+                }
+            }, 
+            'required': ['indexed_text']
+        }
+ }]
+{
+  "indexed_text": [
+    {
+      "idea": "Decision tree is a type of learning algorithm that breaks the input space into regions and has separate parameters for each region."
+    },
+    {
+      "idea": "Decision trees are trained with specialized algorithms and can be considered non-parametric if allowed to learn a tree of arbitrary size."
+    },
+    {
+      "idea": "Decision trees struggle to solve problems that are easy for logistic regression, especially when the decision boundary is not axis-aligned."
+    },
+    {
+      "idea": "Nearest neighbor predictors and decision trees are useful learning algorithms when computational resources are constrained."
+    },
+    {
+      "idea": "Unsupervised learning algorithms do not have a supervision signal and are used to extract information from a distribution without human labor."
+    },
+    {
+      "idea": "Unsupervised learning tasks include finding the best representation of the data, density estimation, learning to draw samples from a distribution, learning to denoise data, finding a manifold, and clustering."
+    },
+    {
+      "idea": "A simpler representation can be achieved through lower dimensional representations, sparse representations, and independent representations."
+    },
+    {
+      "idea": "Principal Components Analysis (PCA) is an unsupervised learning algorithm that learns a lower dimensional representation of the data and decorrelates the original data representation."
+    },
+    {
+      "idea": "PCA finds a linear projection that aligns the direction of greatest variance with the axes of the new space."
+    },
+    {
+      "idea": "k-means clustering is an unsupervised learning algorithm that divides the training set into k different clusters of examples that are near each other."
+    },
+    {
+      "idea": "k-means clustering provides a k-dimensional one-hot code vector representing an input."
+    },
+    {
+      "idea": "Stochastic Gradient Descent (SGD) is an optimization algorithm used in nearly all deep learning algorithms."
+    },
+    {
+      "idea": "SGD estimates the gradient using a minibatch of examples and follows the estimated gradient downhill to update the model parameters."
+    },
+    {
+      "idea": "SGD is a scalable way to train large linear models on very large datasets."
+    },
+    {
+      "idea": "Deep learning algorithms combine a dataset, a cost function, an optimization procedure, and a model to build a machine learning algorithm."
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+indexing_system_message = 'Create a comprehensive list describing all specific ideas in the text.'
+indexing_function = [{
+        'name': 'construct_list', 
+        'description': 'Make a comprehensive list of ideas', 
+        'parameters': {
+            'type': 'object', 
+            'properties': {
+                'indexed_text': {
+                    'type': 'array', 
+                    'items': {
+                        'type': "object",
+                        'properties': {
+                            'idea': { 
+                                'type': "string", 
+                                'description': "Comprehensive yet concise description" },
+                        }
+                    }
+                }
+            }, 
+            'required': ['indexed_text']
+        }
+ }]
+ 

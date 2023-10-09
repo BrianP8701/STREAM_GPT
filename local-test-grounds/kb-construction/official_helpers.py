@@ -1,9 +1,9 @@
 import openai
-import official_global_vars as gv
 import official_prompts as p
 import json
+import os
 
-openai.api_key = gv.OPENAI_API_KEY
+openai.api_key = os.environ.get('OPENAI_API_KEY')
 
 def summarize_chunk(chunk):
     messages=[

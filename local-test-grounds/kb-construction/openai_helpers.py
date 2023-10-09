@@ -1,12 +1,9 @@
 import openai
-import global_vars as gv
 import requests
 import tiktoken
 import prompts as p
 import helpers as h
 import json
-
-openai.api_key = gv.OPENAI_API_KEY
 
 def chat_completion_request(messages, model='gpt-3.5-turbo-16k', functions=None, function_call='auto', temperature=0.5, max_tokens=None, stop=None, top_p=1, frequency_penalty=0, presence_penalty=0, stream=False):
     completion = openai.ChatCompletion.create(model=model,messages=messages,functions=functions,function_call=function_call,temperature=temperature,max_tokens=max_tokens,stop=stop,top_p=top_p,frequency_penalty=frequency_penalty,presence_penalty=presence_penalty,stream=stream)

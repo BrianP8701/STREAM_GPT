@@ -1,6 +1,9 @@
 import json
 
 class Knowledge_Tree:
+    '''
+        This is a standard tree data structure, with the addition of a data field for each node.
+    '''
     def __init__(self):
         self.nodes = {}
         self.root = None
@@ -46,3 +49,30 @@ class Knowledge_Tree:
     def load_from_file(self, file_path):
         with open(file_path, 'r') as f:
             self.nodes = json.load(f)
+            
+class Global_Knowledge_Tree(Knowledge_Tree):
+    '''
+        This is the same as Knowledge_Tree, but with a list of root nodes of branches within the tree
+        that represent individual documents.
+    '''
+    def __init__(self):
+        super().__init__() 
+        self.document_roots = []  
+        self.nodes.add_node('Global Root Node')
+        self.root = 'Global Root Node'
+        
+    def add_knowledge_tree(self, subtree):
+        current_node = self.root
+        document_root_data = subtree.nodes[subtree.root]['data']
+        for node in subtree.nodes:
+            self.tree.add_node(node, data=subtree.nodes[node]['data'])
+        traversing_tree = True
+        while(traversing_tree):
+            if self.are_all_children_documents(current_node):
+                traversing_tree = False
+                self.add_node(subtree.root, current_node)
+            else:
+                current_node = subtree.nodes[current_node]['children'][0]
+                
+    def are_all_children_documents(self, node_id):
+        return all(child in self.document_roots for child in self.nodes[node_id]['children'])

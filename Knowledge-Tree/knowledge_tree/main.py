@@ -1,11 +1,12 @@
 '''
     This is the primary file that an end user will stay in to interact with the knowledge tree.
 '''
-import utils.preprocessing as preprocessing
 import utils.helpers as helpers
 import tree.construct_tree as construct_tree
+import tree.chunk_text as chunk_text
+import tree.tree_class as tree
 
-def add_document_to_tree(tree, text, text_name, prompt):
+def add_document_to_tree(tree: tree.Global_Knowledge_Tree, text, text_name, prompt):
     '''
         This method breaks your text into chunks, and adds these chunks to 
         a hierarchal knowledge tree.
@@ -21,9 +22,9 @@ def add_document_to_tree(tree, text, text_name, prompt):
     '''
     
     # First we need to turn the text into its own knowledge tree, and then add it as a branch to the main tree
-    chunks = preprocessing.chunk_text(text)
+    chunks = chunk_text.basic_chunk_text(text)
     helpers.upload_chunks(chunks, text_name) # The actual knowledge tree won't contain the text, but rather pointers to chunks
-    text_tree = construct_tree.Basic_Construct_Tree_From_String(chunks, text_name, prompt).tree
+    subtree = construct_tree.Basic_Construct_Tree_From_String(chunks, text_name, prompt).tree # Creates a hierarchal knowledge tree representing the given text
     
     
     None

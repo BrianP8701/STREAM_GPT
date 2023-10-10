@@ -15,3 +15,19 @@ def num_tokens_from_messages(messages, model="gpt-3.5-turbo-0613"):
                 num_tokens += -1  # role is always required and always 1 token
     num_tokens += 2  # every reply is primed with <im_start>assistant
     return num_tokens
+
+def concatenate_with_indices(string_list):
+    '''
+    Concatenates a list of strings, separating them with four new lines and 
+    prefixing each with its index in the format '<Category n>'.
+
+    Args:
+    - string_list (list of str): The list of strings to concatenate.
+
+    Returns:
+    - str: The concatenated string with indices and newline separations.
+    '''
+    result = ""
+    for index, string in enumerate(string_list):
+        result += f'<Category {index}>\n{string}\n\n\n\n'
+    return result

@@ -1,11 +1,16 @@
 import knowledge_tree.tree.tree_class as knowledge_tree
-import utils.call_models as call_models
+import utils.inference as call_models
 import constants.prompts as prompts
 
 class Basic_Construct_Tree_From_String:
     '''
-        This class creates a hierarchal knowledge tree representing 
-        the given text, guided by the given prompt.
+        This class creates a hierarchal knowledge tree representing the given text (Already broken into chunks), guided by the given prompt.
+        
+        1. Add each chunk to the tree as a leaf node
+        2. Summarize and label each chunk with keywords. Add these 'compressed chunks' to the tree as parents of the corresponding leaf nodes.
+        3. Combine nearby 'compressed chunks' into a single 'compressed chunk', and summarize and label it with keywords. Add this 'compressed chunk' 
+           to the tree as a parent of the corresponding 'compressed chunks'.
+        4. Repeat step 3 until a singular root summary node is obtained.
     '''
     def __init__(self, chunks, text_id, prompt):
         '''
@@ -46,6 +51,7 @@ class Basic_Construct_Tree_From_String:
             next_layer = self.summarize_layer(layer, depth)
             if(len(next_layer) == 1):
                 root_summary_done = True
+                self.tree.root = next_layer[0]
             layer = next_layer
 
     def summarize_layer(self, layer, depth, granularity=2):

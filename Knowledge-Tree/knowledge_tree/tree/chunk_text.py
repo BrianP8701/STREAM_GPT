@@ -1,8 +1,5 @@
-'''
-    This file contains functions that are used to manipulate, chunk, filter text.
-'''
 
-def chunk_text(text, chunk_char_size=6000):
+def basic_chunk_text(text, chunk_char_size=6000):
     '''
         This method breaks your text into chunks of chunk_char_size with 10% overlap.
 

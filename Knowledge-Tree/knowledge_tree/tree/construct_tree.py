@@ -28,7 +28,7 @@ class Basic_Construct_Tree_From_String:
         self.tree = knowledge_tree.Knowledge_Tree()
         leaf_layer = [f'0_{text_id}{i}' for i in range(len(chunks) + 1)] # Creates a list of keys for the leaf nodes in the tree
         self.tree.add_layer(leaf_layer, chunks) # Adds chunks to the tree as nodes with no connections yet
-        self.hierarchical_summarization(chunks, leaf_layer)
+        self.hierarchical_summarization(leaf_layer)
         
     def hierarchical_summarization(self, layer):
         '''

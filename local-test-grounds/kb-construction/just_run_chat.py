@@ -1,6 +1,7 @@
 import openai
 import json
 import os
+import helpers as h
 
 openai.api_key = os.environ.get('OPENAI_API_KEY')
 
@@ -16,17 +17,20 @@ def chat_with_gpt3_5instruct(prompt, temperature=0.0):
 
 with open('/Users/brianprzezdziecki/Research/Mechatronics/STREAM_GPT/DeepLearningChunks OCR.json', 'r') as f:
     json_data = json.load(f)
-        
-chunk = json_data[2]
-messages=[
-    {"role": "system", "content": 'Take notes of relevant ideas talked about in depth in this text, summarize. Dont take note of superficial mentions. Make sure anything you take note of is not merely mentioned, but explained, discussed in depth, or otherwise elaborated on.'},
-    {"role": "user", "content": chunk}
-]
-prompt = "Take notes of relevant ideas talked about in depth in this text, summarize. Dont take note of superficial mentions. Make sure anything you take note of is not merely mentioned, but explained, discussed in depth, or otherwise elaborated on. Say nothing if nothing is being taught in this text." + chunk
-completion = chat_with_gpt3_5instruct(prompt)
-print(messages)
-print(completion)
-print('\n\n')
-completion = chat_with_gpt3_5turbo(messages)
-print(messages)
-print(completion)
+
+
+good_data = []
+index = 0
+for chunk in json_data:
+    messages=[
+        {"role": "system", "content": 'This text was messed up during collection. Can you rewrite it EXACTLY the same but with spaces and correct format? Say nothing else, just return the text formatted correctly wiht no changes.'},
+        {"role": "user", "content": chunk}
+    ]
+    completion = chat_with_gpt3_5turbo(messages)
+    print(completion)
+    good_data.append(completion['choices'][0]['message']['content'])
+    print(index)
+    index+= 1
+    
+h.save_list_to_file(good_data, '/Users/brianprzezdziecki/Research/Mechatronics/STREAM_GPT/DL_IanGoodfellow.json')
+    

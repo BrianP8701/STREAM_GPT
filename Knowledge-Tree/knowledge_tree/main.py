@@ -22,12 +22,11 @@ def add_document_to_tree(tree: tree.Global_Knowledge_Tree, text, text_name, prom
     '''
     
     # First we need to turn the text into its own knowledge tree, and then add it as a branch to the main tree
-    chunks = chunk_text.basic_chunk_text(text)
-    helpers.upload_chunks(chunks, text_name) # The actual knowledge tree won't contain the text, but rather pointers to chunks
+    chunks = chunk_text.basic_chunk_text(text, chunk_char_size=6000) # Breaks the text into a list of chunks
+    print(chunks)
+    # helpers.upload_chunks(chunks, text_name) # The actual knowledge tree won't contain the text, but rather pointers to chunks
     subtree = construct_tree.Basic_Construct_Tree_From_String(chunks, text_name, prompt).tree # Creates a hierarchal knowledge tree representing the given text
-    
-    
-    None
+    return subtree
     
 def cleanup_and_reorganize_tree(tree):
     '''

@@ -58,7 +58,7 @@ class Global_Knowledge_Tree(Knowledge_Tree):
     def __init__(self):
         super().__init__() 
         self.document_roots = []  
-        self.nodes.add_node('Global Root Node')
+        self.add_node('Global Root Node')
         self.root = 'Global Root Node'
         
     def add_knowledge_tree(self, subtree):

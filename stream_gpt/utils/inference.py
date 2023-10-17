@@ -2,9 +2,8 @@ import openai
 import os
 import json
 import warnings
-import constants.prompts as prompts
-import constants.function_schemas as function_schemas
-import utils.helpers as helpers
+from stream_gpt.constants import prompts, function_schemas
+from stream_gpt.utils import helpers
 
 openai.api_key = os.environ.get('OPENAI_API_KEY')
 
@@ -35,11 +34,11 @@ def chat_with_gpt3_instruct(prompt, temperature=0.0):
 
 def summarize(user_prompt, text, model="gpt-3.5-turbo-instruct"):
     if model == "gpt-3.5-turbo-instruct":
-        prompt = f'{prompts.keyword_summarization_prompt} {user_prompt}\n{text}'
+        prompt = f'{prompts.KEYWORD_SUMMARIZATION} {user_prompt}\n{text}'
         response = chat_with_gpt3_instruct(prompt).choices[0].text
     if model == "gpt-3.5-turbo-16k":
         messages=[
-            {"role": "system", "content": f'{prompts.summarization_system_message} {user_prompt}'},
+            {"role": "system", "content": f'{prompts.SUMMARIZATION} {user_prompt}'},
             {"role": "user", "content": text}
         ]
         response = chat_with_gpt3_turbo(messages).choices[0]['content']
@@ -60,7 +59,21 @@ def rank_categories(user_prompt, categories, model='gpt-3.5-turbo-16k'):
     '''
     messages = [{"role": "user", "content": user_prompt},
                 {"role": "user", "content": helpers.concatenate_with_indices(categories)}]
-    response = function_call_with_gpt3_turbo(messages, function_schemas.rank_categories, function_call={'name':'rank_categories'}).choices[0]['message']['function_call']['arguments']
+    response = function_call_with_gpt3_turbo(messages, function_schemas.RANK_CATEGORIES_FUNCTION_SCHEMA, function_call={'name':'rank_categories'}).choices[0]['message']['function_call']['arguments']
     return(json.loads(response))
     
-    
+def choose_best_scraped_text(samples):
+    '''
+        When using pdf scrapers, sometimes noise can happen. Here we ask ChatGPT 
+        to choose the best sample from a list of samples.
+        
+        Args:
+        - samples (list): List of sample from each scraper. Each sample is a string.
+    '''
+    user_prompt = ''
+    index = 1
+    for sample in samples:
+        user_prompt += f'{index}: {sample}\n'
+    messages = [{"role": "user", "content": user_prompt}]
+    response = function_call_with_gpt3_turbo(messages, function_schemas.CHOOSE_BEST_SCRAPED_TEXT_FUNCTION_SCHEMA, function_call={'name':'choose_best_scraped_text'}).choices[0]['message']['function_call']['arguments']
+    return(json.loads(response))

@@ -1,4 +1,3 @@
-
 def basic_chunk_text(text, chunk_char_size=4000):
     '''
         This method breaks your text into chunks of chunk_char_size with 10% overlap.

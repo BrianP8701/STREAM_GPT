@@ -1,6 +1,6 @@
-import tree.tree_class as knowledge_tree
+import stream_gpt.knowledge_tree.tree.tree_class as knowledge_tree
 import stream_gpt.utils.inference as call_models
-import constants.prompts as prompts
+import stream_gpt.constants.prompts as prompts
 
 class Basic_Construct_Tree_From_Chunked_Document:
     '''

@@ -1,7 +1,14 @@
-import constants.prompts as prompts
-rank_categories = [{
+import stream_gpt.constants.prompts as prompts
+
+                ################################
+                #                              #
+                #    Knowledge Tree Schemas    #
+                #                              #
+                ################################
+                
+RANK_CATEGORIES_FUNCTION_SCHEMA = [{
         'name': 'rank_categories', 
-        'description': f'{prompts.rank_categories_prompt}', 
+        'description': f'{prompts.RANK_CATEGORIES}', 
         'parameters': {
             'type': 'object', 
             'properties': {
@@ -21,22 +28,22 @@ rank_categories = [{
         }
  }]
 
-indexing_function = [{
-        'name': 'construct_list', 
-        'description': 'Generate a comprehensive list focusing on only the pivotal concepts, techniques, or methodologies that are discussed in depth within the content, whether its code, text, or documentation. Exclude superficial mentions, headers, table of contents, and any content that is not critically elaborated upon.', 
+
+                ################################
+                #                              #
+                #     Data Scraper Schemas     #
+                #                              #
+                ################################
+                
+CHOOSE_BEST_SCRAPED_TEXT_FUNCTION_SCHEMA = [{
+        'name': 'choose_best_scraped_text',
+        'description': prompts.CHOOSE_BEST_SCRAPED_TEXT, 
         'parameters': {
             'type': 'object', 
             'properties': {
                 'indexed_text': {
-                    'type': 'array', 
-                    'items': {
-                        'type': "object",
-                        'properties': {
-                            'idea': { 
-                                'type': "string", 
-                                'description': "Comprehensive yet concise description of idea or principle discussed" },
-                        }
-                    }
+                    'type': 'int', 
+                    'description': 'Provide the number of the best text. Please say nothing if you think none of the texts are relevant.'
                 }
             }, 
             'required': ['indexed_text']

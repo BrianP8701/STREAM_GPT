@@ -1,12 +1,10 @@
 '''
     This is the primary file that an end user will stay in to interact with the knowledge tree.
 '''
-import stream_gpt.utils.helpers as helpers
-import tree.construct_tree as construct_tree
-import tree.chunk_text as chunk_text
-import tree.tree_class as tree
+import stream_gpt.knowledge_tree.tree.tree_class as knowledge_tree
+from stream_gpt.knowledge_tree.tree import construct_tree, chunk_text
 
-def add_document_to_tree(tree: tree.Global_Knowledge_Tree, text, text_name, prompt):
+def add_document_to_tree(tree: knowledge_tree.Global_Knowledge_Tree, text, text_name, prompt):
     '''
         This method breaks your text into chunks, and adds these chunks to 
         a hierarchal knowledge tree.

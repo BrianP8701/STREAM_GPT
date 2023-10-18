@@ -22,7 +22,7 @@ def function_call_with_gpt3_turbo(messages, functions, function_call='auto', tem
         messages = [{"role": "user", "content": messages}]
     for message in messages:
         message["content"] = message["content"].encode('latin-1', errors='ignore').decode('latin-1')
-    completion = openai.ChatCompletion.create(model='gpt-3.5-turbo-16k',messages=messages,temperature=temperature)
+    completion = openai.ChatCompletion.create(model='gpt-3.5-turbo-16k',messages=messages,temperature=temperature,functions=functions, function_call=function_call)
     return completion
 
 def chat_with_gpt3_instruct(prompt, temperature=0.0):
@@ -59,7 +59,7 @@ def rank_categories(user_prompt, categories, model='gpt-3.5-turbo-16k'):
     '''
     messages = [{"role": "user", "content": user_prompt},
                 {"role": "user", "content": helpers.concatenate_with_indices(categories)}]
-    response = function_call_with_gpt3_turbo(messages, function_schemas.RANK_CATEGORIES_FUNCTION_SCHEMA, function_call={'name':'rank_categories'}).choices[0]['message']['function_call']['arguments']
+    response = function_call_with_gpt3_turbo(messages, function_schemas.RANK_CATEGORIES, function_call={'name':'rank_categories'}).choices[0]['message']['function_call']['arguments']
     return(json.loads(response))
     
 def choose_best_scraped_text(samples):
@@ -75,5 +75,7 @@ def choose_best_scraped_text(samples):
     for sample in samples:
         user_prompt += f'{index}: {sample}\n'
     messages = [{"role": "user", "content": user_prompt}]
-    response = function_call_with_gpt3_turbo(messages, function_schemas.CHOOSE_BEST_SCRAPED_TEXT_FUNCTION_SCHEMA, function_call={'name':'choose_best_scraped_text'}).choices[0]['message']['function_call']['arguments']
-    return(json.loads(response))
+    response = function_call_with_gpt3_turbo(messages, function_schemas.CHOOSE_BEST_SAMPLE, function_call={'name':'choose_best_sample'}).choices[0]['message']['function_call']['arguments']
+    return(json.loads(response)['best_sample'])
+
+

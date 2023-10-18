@@ -24,4 +24,5 @@ the documents in order of relevance.'''
 
 CHOOSE_BEST_SCRAPED_TEXT =    '''We used multiple methods to scrape text from pdfs. Some methods 
 have errors, like strange spacing characters etc. We'll provide you with the same text scraped using
-different methods. Please choose the best one. Just say the number of the best one.'''
+different methods. Please choose the best sample out of the given numbered samples. Just say the number 
+of the best one.'''

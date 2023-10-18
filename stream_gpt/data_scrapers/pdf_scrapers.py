@@ -20,46 +20,62 @@ from pdf2image import convert_from_path
 import pytesseract
 from stream_gpt.utils import inference
 import random
+import json
+from pdfminer.layout import LTTextBoxHorizontal
+from pdfminer.high_level import extract_pages
 
 scrapers = [
-    'pdfminer_scraper',
     'pdfplumber_scraper',
     'pypdf2_scraper',
-    'pytesseract_scraper'
+    'pytesseract_scraper',
+    'pdfminer_scraper'
 ]
 
 def pdf_to_text(path):
     '''
-    Try to extract text from a pdf using all of the scrapers in this file.
-    Use ChatGPT to pick the best one.
+    Extract text from a PDF using all available scrapers and have ChatGPT pick the best extraction.
     '''
-    # Try each scraper
-    all_text = [] # [[chunk1, chunk2, ...], [chunk1, chunk2, ...], ...
+    all_text = []  # Store results from each scraper
     for scraper_name in scrapers:
         scraper = globals()[scraper_name]
         try:
             extracted_text = scraper(path)
             all_text.append(extracted_text)
+            
+            # Save the extracted text for review
+            with open(f'data/raw_library/{len(all_text)}{scraper_name}.json', 'w') as f:
+                json.dump(extracted_text, f)
         except Exception as e:
             raise Exception(f'{scraper} failed: {e}')
-        
-    # now i need to get samples from each of these in proper token size, and ask chatgpt which one is best
-    # Get 3 random samples from each of the scrapers of 100 characters each. Concateate samples from each sample into their own string.
-    samples = [] # [sample1, sample2, ...]
+
+    # Collect random samples from each scraper result for comparison
+    samples = []
+    rand_chunk_indices = [random.randint(0, len(all_text[0])-1) for _ in range(3)]
+    for scraper_index, scraped_chunks in enumerate(all_text, 1):
+        sample = ' '.join([scraped_chunks[i][:100] for i in rand_chunk_indices])
+        sample = f'<Sample {scraper_index}>: {sample}\n'
+        samples.append(sample)
+
+    # Ask ChatGPT to determine the best sample
+    best_sample_index = inference.choose_best_scraped_text(samples)
     
-    # make a list of 3 random numbers between 0 and len(all_text[0])
-    rand_chunk_indices = [random.randint(0, len(all_text[0])) for i in range(3)]
-    for scraped_chunks in all_text:
-        # Get first 100 chars of rand_chunK_indices in scraped_chunks and concatenate them together
-        samples.append(''.join([scraped_chunks[i][:100] for i in rand_chunk_indices]))
+    return all_text[best_sample_index]
+
     
-    # Ask chatgpt to pick the best one
-    
-    
-    
+
 def pdfminer_scraper(path):
-    from pdfminer.high_level import extract_text
-    return extract_text(path)
+    extracted_text = []
+    
+    for page_layout in extract_pages(path):
+        page_text = []  # Temporary list to store text from each element of the current page
+        for element in page_layout:
+            if isinstance(element, LTTextBoxHorizontal):
+                page_text.append(element.get_text())
+                
+        # Concatenate all the text elements of the current page and append to the main list
+        extracted_text.append(' '.join(page_text))
+                
+    return extracted_text
 
 def pdfplumber_scraper(path):
     all_text = []

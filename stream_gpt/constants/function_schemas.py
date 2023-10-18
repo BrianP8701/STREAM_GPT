@@ -6,7 +6,7 @@ import stream_gpt.constants.prompts as prompts
                 #                              #
                 ################################
                 
-RANK_CATEGORIES_FUNCTION_SCHEMA = [{
+RANK_CATEGORIES = [{
         'name': 'rank_categories', 
         'description': f'{prompts.RANK_CATEGORIES}', 
         'parameters': {
@@ -35,15 +35,15 @@ RANK_CATEGORIES_FUNCTION_SCHEMA = [{
                 #                              #
                 ################################
                 
-CHOOSE_BEST_SCRAPED_TEXT_FUNCTION_SCHEMA = [{
-        'name': 'choose_best_scraped_text',
+CHOOSE_BEST_SAMPLE = [{
+        'name': 'choose_best_sample',
         'description': prompts.CHOOSE_BEST_SCRAPED_TEXT, 
         'parameters': {
             'type': 'object', 
             'properties': {
-                'indexed_text': {
-                    'type': 'int', 
-                    'description': 'Provide the number of the best text. Please say nothing if you think none of the texts are relevant.'
+                'best_sample': {
+                    'type': 'integer', 
+                    'description': 'Provide the number of the sample that you think is best formatted. (No spacing errors, no missing characters, etc.)'
                 }
             }, 
             'required': ['indexed_text']

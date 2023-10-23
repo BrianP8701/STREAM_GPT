@@ -1,0 +1,1 @@
+CHROME_DRIVER = '/Users/brianprzezdziecki/Downloads/chromedriver-mac-arm64/chromedriver'

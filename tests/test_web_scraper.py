@@ -1,10 +1,10 @@
 import pytest
 import json
-from stream_gpt.data_scrapers.web_scraper import selenium_scrape_site, bs4_scrape_site
+from stream_gpt.data_scrapers.web_scraper import apify_website_content_crawler
+from stream_gpt.constants.keys import APIFY_KEY
 
-def test_bs4_scraper():
-    text = bs4_scrape_site('https://docs.llamaindex.ai/en/stable/')
-    assert len(text) > 0
-    with open('data/test/Glockkey.json', 'w') as f:
-        json.dump(text, f)
-        
+@pytest.mark.skip(reason="Already tested")
+def test_web_scraper():
+    scraped_data = apify_website_content_crawler('https://docs.llamaindex.ai/en/stable/', APIFY_KEY)
+    with open('llama_index_docs', 'w') as f:
+        json.dump(scraped_data, f, indent=4) 

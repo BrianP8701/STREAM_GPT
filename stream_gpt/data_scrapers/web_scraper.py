@@ -1,8 +1,7 @@
 from apify_client import ApifyClient
-from stream_gpt.constants.keys import APIFY_KEY
 import json
 
-def apify_website_content_crawler(url, includeUrlGlobs=[], excludeUrlGlobs=[]):
+def apify_website_content_crawler(url, apify_key, includeUrlGlobs=[], excludeUrlGlobs=[]):
     """
     Use Apify's Website Content Crawler to scrape content from a given URL.
 
@@ -12,6 +11,7 @@ def apify_website_content_crawler(url, includeUrlGlobs=[], excludeUrlGlobs=[]):
 
     Parameters:
     - url (str): The starting URL for the web crawling process.
+    - apify_key (str): The API key used to authenticate with Apify. Get one at: https://console.apify.com/
     - includeUrlGlobs (list, optional): List of URL glob patterns to be exclusively included in the crawl.
     - excludeUrlGlobs (list, optional): List of URL glob patterns to be excluded from the crawl.
 
@@ -27,7 +27,7 @@ def apify_website_content_crawler(url, includeUrlGlobs=[], excludeUrlGlobs=[]):
     >>> print(result)
     """
     # Initialize the ApifyClient with your API token
-    client = ApifyClient(APIFY_KEY)
+    client = ApifyClient(apify_key)
 
     # Prepare the Actor input
     run_input = {

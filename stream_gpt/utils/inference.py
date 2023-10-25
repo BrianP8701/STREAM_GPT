@@ -3,9 +3,10 @@ import os
 import json
 import warnings
 from stream_gpt.constants import prompts, function_schemas
+from stream_gpt.constants.keys import OPENAI_API_KEY
 from stream_gpt.utils import helpers
 
-openai.api_key = os.environ.get('OPENAI_API_KEY')
+openai.api_key = OPENAI_API_KEY
 
 def chat_with_gpt3_turbo(messages, temperature=0.0):
     if type(messages) == str: # In case someone accidentally passes in a string instead of a list of messages

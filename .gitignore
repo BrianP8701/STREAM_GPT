@@ -5,7 +5,7 @@ __pycache__/
 *.pyd
 .DS_Store
 data/test/
-
+stream_gpt/constants/keys.py
 tests/arbritrary.py
 
 # Byte-compiled / optimized / DLL files

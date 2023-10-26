@@ -25,6 +25,7 @@ from pdfminer.layout import LTTextBoxHorizontal
 from pdfminer.high_level import extract_pages
 from stream_gpt.types.document import Document
 from stream_gpt.interfaces.scraper_interface import Scraper
+from typing import List
 
 class PDFScraper(Scraper):
     def __init__(self):
@@ -35,7 +36,7 @@ class PDFScraper(Scraper):
             self.pdfminer_scraper
         ]
 
-    def scrape(self, path, metadata={'title':''}) -> Document:
+    def scrape(self, path, metadata={'title':''}) -> List[Document]:
         '''
         Extract text from a PDF using all available scrapers and have ChatGPT pick the best extraction.
         '''
@@ -63,7 +64,7 @@ class PDFScraper(Scraper):
         # Ask ChatGPT to determine the best sample
         best_sample_index = inference.choose_best_scraped_text(samples)
         print(best_sample_index)
-        return self.convert_scraped_data_to_documents(all_text[best_sample_index], metadata)
+        return [self.convert_scraped_data_to_documents(all_text[best_sample_index], metadata)]
 
     def pdfminer_scraper(self, path):
         extracted_text = []

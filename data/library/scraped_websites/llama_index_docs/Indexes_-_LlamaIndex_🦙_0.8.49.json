@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/core_modules/data_modules/index/root.html",
+        "title": "Indexes - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "## Concept[\uf0c1](#concept \"Permalink to this heading\")\n\nAn `Index` is a data structure that allows us to quickly retrieve relevant context for a user query. For LlamaIndex, it\u2019s the core foundation for retrieval-augmented generation (RAG) use-cases.\n\nAt a high-level, `Indices` are built from [Documents](https://docs.llamaindex.ai/en/stable/core_modules/data_modules/documents_and_nodes/root.html). They are used to build [Query Engines](https://docs.llamaindex.ai/en/stable/core_modules/query_modules/query_engine/root.html) and [Chat Engines](https://docs.llamaindex.ai/en/stable/core_modules/query_modules/chat_engines/root.html) which enables question & answer and chat over your data.\n\nUnder the hood, `Indices` store data in `Node` objects (which represent chunks of the original documents), and expose a [Retriever](https://docs.llamaindex.ai/en/stable/core_modules/query_modules/retriever/root.html) interface that supports additional configuration and automation.\n\nFor a more in-depth explanation, check out our guide below:\n\n*   [How Each Index Works](https://docs.llamaindex.ai/en/stable/core_modules/data_modules/index/index_guide.html)"
+}

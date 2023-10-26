@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/examples/response_synthesizers/refine.html",
+        "title": "Refine - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## Refine[\uf0c1](#refine \"Permalink to this heading\")\n\n## Load Data[\uf0c1](#load-data \"Permalink to this heading\")\n\nfrom llama\\_index import SimpleDirectoryReader\n\nreader \\= SimpleDirectoryReader(\n    input\\_files\\=\\[\"../data/paul\\_graham/paul\\_graham\\_essay.txt\"\\]\n)\n\ndocs \\= reader.load\\_data()\n\n## Summarize[\uf0c1](#summarize \"Permalink to this heading\")\n\nfrom llama\\_index.llms import OpenAI\n\nllm \\= OpenAI(model\\=\"gpt-3.5-turbo\")\n\nfrom llama\\_index import ServiceContext\n\nservice\\_context \\= ServiceContext.from\\_defaults(llm\\=llm)\n\nfrom llama\\_index.response\\_synthesizers import Refine\n\nsummarizer \\= Refine(service\\_context\\=service\\_context, verbose\\=True)\n\nresponse \\= summarizer.get\\_response(\"who is Paul Graham?\", \\[text\\])\n\n\\> Refine context: making fakes for a local antique dealer. She'd ...\n> Refine context: look legit, and the key to looking legit is hig...\n> Refine context: me 8 years to realize it. Even then it took me ...\n> Refine context: was one thing rarer than Rtm offering advice, i...\n\nPaul Graham is an individual who has played a crucial role in shaping the internet infrastructure and has also pursued a career as a writer. At one point, he received advice from a friend that urged him not to let Y Combinator be his final noteworthy achievement. This advice prompted him to reflect on his future with Y Combinator and ultimately led him to pass on the responsibility to others. He approached Jessica and Sam Altman to assume leadership positions in Y Combinator, aiming to secure its continued success."
+}

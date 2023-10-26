@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/how_to/insert.html",
+        "title": "\n  404 Not Found\n - Read the Docs for Business",
+        "description": null
+    },
+    "text": "## 404 Not Found\n\nYou are browsing the documentation of `llamaindex-llamaindex`. The documentation page you are looking for was not found.\n\nDocumentation changes over time and pages are moved around. You can try to navigate to [the index page](https://docs.llamaindex.ai/) of the project and use its navigation, or search for a similar page.\n\n### Are you the project owner?\n\nHere are some tips to address 404 errors:\n\n*   Use your own custom 404 page: [Read more \u00bb](https://docs.readthedocs.io/en/stable/reference/404-not-found.html)\n*   Create redirects when you move contents: [Read more \u00bb](https://docs.readthedocs.io/en/stable/user-defined-redirects.html)"
+}

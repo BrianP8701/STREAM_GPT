@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/api_reference/example_notebooks.html",
+        "title": "Example Notebooks - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## Example Notebooks[\uf0c1](#example-notebooks \"Permalink to this heading\")\n\nWe offer a wide variety of example notebooks. They are referenced throughout the documentation.\n\nExample notebooks are found [here](https://github.com/jerryjliu/llama_index/tree/main/docs/examples)."
+}

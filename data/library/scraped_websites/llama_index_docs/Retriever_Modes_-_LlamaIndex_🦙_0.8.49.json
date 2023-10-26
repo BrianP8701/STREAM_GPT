@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/core_modules/query_modules/retriever/retriever_modes.html",
+        "title": "Retriever Modes - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## Retriever Modes[\uf0c1](#retriever-modes \"Permalink to this heading\")\n\nHere we show the mapping from `retriever_mode` configuration to the selected retriever class.\n\n> Note that `retriever_mode` can mean different thing for different index classes.\n\n## Vector Index[\uf0c1](#vector-index \"Permalink to this heading\")\n\nSpecifying `retriever_mode` has no effect (silently ignored). `vector_index.as_retriever(...)` always returns a VectorIndexRetriever.\n\n## Summary Index[\uf0c1](#summary-index \"Permalink to this heading\")\n\n*   `default`: SummaryIndexRetriever\n    \n*   `embedding`: SummaryIndexEmbeddingRetriever\n    \n*   `llm`: SummaryIndexLLMRetriever\n    \n\n## Tree Index[\uf0c1](#tree-index \"Permalink to this heading\")\n\n*   `select_leaf`: TreeSelectLeafRetriever\n    \n*   `select_leaf_embedding`: TreeSelectLeafEmbeddingRetriever\n    \n*   `all_leaf`: TreeAllLeafRetriever\n    \n*   `root`: TreeRootRetriever\n    \n\n## Keyword Table Index[\uf0c1](#keyword-table-index \"Permalink to this heading\")\n\n*   `default`: KeywordTableGPTRetriever\n    \n*   `simple`: KeywordTableSimpleRetriever\n    \n*   `rake`: KeywordTableRAKERetriever\n    \n\n## Knowledge Graph Index[\uf0c1](#knowledge-graph-index \"Permalink to this heading\")\n\n*   `keyword`: KGTableRetriever\n    \n*   `embedding`: KGTableRetriever\n    \n*   `hybrid`: KGTableRetriever\n    \n\n## Document Summary Index[\uf0c1](#document-summary-index \"Permalink to this heading\")\n\n*   `llm`: DocumentSummaryIndexLLMRetriever\n    \n*   `embedding`: DocumentSummaryIndexEmbeddingRetrievers"
+}

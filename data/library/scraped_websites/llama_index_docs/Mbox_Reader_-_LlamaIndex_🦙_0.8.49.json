@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/examples/data_connectors/MboxReaderDemo.html",
+        "title": "Mbox Reader - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## Mbox Reader[\uf0c1](#mbox-reader \"Permalink to this heading\")\n\n%env OPENAI\\_API\\_KEY=sk-\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\n\nfrom llama\\_index import MboxReader, VectorStoreIndex\n\ndocuments \\= MboxReader().load\\_data(\n    \"mbox\\_data\\_dir\", max\\_count\\=1000\n)  \\# Returns list of documents\n\nindex \\= VectorStoreIndex.from\\_documents(\n    documents\n)  \\# Initialize index with documents\n\nquery\\_engine \\= index.as\\_query\\_engine()\nres \\= query\\_engine.query(\"When did i have that call with the London office?\")\n\n\\> \\[query\\] Total LLM token usage: 100 tokens\n> \\[query\\] Total embedding token usage: 10 tokens\n\n\\> There is a call scheduled with the London office at 12am GMT on the 10th of February."
+}

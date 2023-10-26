@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/examples/response_synthesizers/tree_summarize.html",
+        "title": "Tree Summarize - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## Tree Summarize[\uf0c1](#tree-summarize \"Permalink to this heading\")\n\n## Load Data[\uf0c1](#load-data \"Permalink to this heading\")\n\nfrom llama\\_index import SimpleDirectoryReader\n\nreader \\= SimpleDirectoryReader(\n    input\\_files\\=\\[\"../data/paul\\_graham/paul\\_graham\\_essay.txt\"\\]\n)\n\ndocs \\= reader.load\\_data()\n\n## Summarize[\uf0c1](#summarize \"Permalink to this heading\")\n\nfrom llama\\_index.response\\_synthesizers import TreeSummarize\n\nsummarizer \\= TreeSummarize(verbose\\=True)\n\nresponse \\= await summarizer.aget\\_response(\"who is Paul Graham?\", \\[text\\])\n\n6 text chunks after repacking\n1 text chunks after repacking\n\nPaul Graham is a computer scientist, writer, artist, entrepreneur, investor, and essayist. He is best known for his work in artificial intelligence, Lisp programming, and writing the book On Lisp, as well as for co-founding the startup accelerator Y Combinator and for his essays on technology, business, and start-ups. He is also the creator of the programming language Arc and the Lisp dialect Bel."
+}

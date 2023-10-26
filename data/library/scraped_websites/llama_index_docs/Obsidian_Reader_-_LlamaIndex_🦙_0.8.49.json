@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/examples/data_connectors/ObsidianReaderDemo.html",
+        "title": "Obsidian Reader - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## Obsidian Reader[\uf0c1](#obsidian-reader \"Permalink to this heading\")\n\n%env OPENAI\\_API\\_KEY=sk-\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\\*\n\nimport logging\nimport sys\n\nlogging.basicConfig(stream\\=sys.stdout, level\\=logging.INFO)\nlogging.getLogger().addHandler(logging.StreamHandler(stream\\=sys.stdout))\n\nfrom llama\\_index import ObsidianReader, VectorStoreIndex\n\ndocuments \\= ObsidianReader(\n    \"/Users/hursh/vault\"\n).load\\_data()  \\# Returns list of documents\n\nindex \\= VectorStoreIndex.from\\_documents(\n    documents\n)  \\# Initialize index with documents\n\n\\# set Logging to DEBUG for more detailed outputs\nquery\\_engine \\= index.as\\_query\\_engine()\nres \\= query\\_engine.query(\"What is the meaning of life?\")\n\n\\> \\[query\\] Total LLM token usage: 920 tokens\n> \\[query\\] Total embedding token usage: 7 tokens\n\n'\\\\nThe meaning of life is subjective and can vary from person to person. It is ultimately up to each individual to decide what they believe is the purpose and value of life. Some may find meaning in their faith, while others may find it in their relationships, work, or hobbies. Ultimately, it is up to each individual to decide what brings them joy and fulfillment and to pursue that path.'"
+}

@@ -1,0 +1,7 @@
+{
+    "metadata": {
+        "type": "repo",
+        "path": "tests/data_scrapers/test_pdf_scraper.py"
+    },
+    "text": "from stream_gpt.data_scrapers.pdf_scraper import PDFScraper\nimport json\nimport pytest\n\n@pytest.mark.skip(reason=\"Already tested\")\ndef test_pdf_scraper():\n    PDF_Scraper = PDFScraper()\n    document = PDF_Scraper.scrape('data/raw_library/STREAM_Report.pdf', metadata={'title':'STREAM Report'})\n    document.save_to_file('data/test/')"
+}

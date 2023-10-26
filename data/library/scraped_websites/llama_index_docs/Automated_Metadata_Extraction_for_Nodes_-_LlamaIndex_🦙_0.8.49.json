@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/core_modules/data_modules/documents_and_nodes/usage_metadata_extractor.html",
+        "title": "Automated Metadata Extraction for Nodes - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "You can use LLMs to automate metadata extraction with our `MetadataExtractor` modules.\n\nOur metadata extractor modules include the following \u201cfeature extractors\u201d:\n\n*   `SummaryExtractor` - automatically extracts a summary over a set of Nodes\n    \n*   `QuestionsAnsweredExtractor` - extracts a set of questions that each Node can answer\n    \n*   `TitleExtractor` - extracts a title over the context of each Node\n    \n*   `EntityExtractor` - extracts entities (i.e. names of places, people, things) mentioned in the content of each Node\n    \n\nYou can use these feature extractors within our overall `MetadataExtractor` class. Then you can plug in the `MetadataExtractor` into our node parser:\n\nfrom llama\\_index.node\\_parser.extractors import (\n    MetadataExtractor,\n    TitleExtractor,\n    QuestionsAnsweredExtractor\n)\nfrom llama\\_index.text\\_splitter import TokenTextSplitter\n\ntext\\_splitter \\= TokenTextSplitter(separator\\=\" \", chunk\\_size\\=512, chunk\\_overlap\\=128)\nmetadata\\_extractor \\= MetadataExtractor(\n    extractors\\=\\[\n        TitleExtractor(nodes\\=5),\n        QuestionsAnsweredExtractor(questions\\=3),\n    \\],\n)\n\nnode\\_parser \\= SimpleNodeParser.from\\_defaults(\n    text\\_splitter\\=text\\_splitter,\n    metadata\\_extractor\\=metadata\\_extractor,\n)\n\\# assume documents are defined -> extract nodes\nnodes \\= node\\_parser.get\\_nodes\\_from\\_documents(documents)"
+}

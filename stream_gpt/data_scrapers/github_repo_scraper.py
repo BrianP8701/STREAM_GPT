@@ -2,12 +2,13 @@ import requests
 import base64
 from stream_gpt.types.document import Document
 from stream_gpt.interfaces.scraper_interface import Scraper
+from typing import List
 
 class RepoScraper(Scraper):
     def __init__(self, token):
         self.token = token
         
-    def scrape(self, repo_url, ignore_folders=["venv"], ignore_files=[]):
+    def scrape(self, repo_url, ignore_folders=["venv"], ignore_files=[]) -> List[Document]:
         """
         Fetches the content of all files in a given GitHub repository.
 
@@ -69,7 +70,7 @@ class RepoScraper(Scraper):
         documents=[]
         for path, markdown in scraped_data.items():
             documents.append(Document(metadata={
-                'type': 'github_repo', 
+                'type': 'repo', 
                 'path': path
             }, text=markdown))
         return documents

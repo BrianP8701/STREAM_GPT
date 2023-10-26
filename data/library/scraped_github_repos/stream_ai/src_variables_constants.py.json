@@ -1,0 +1,7 @@
+{
+    "metadata": {
+        "type": "repo",
+        "path": "src/variables/constants.py"
+    },
+    "text": "RATIO_INITIALIZATION_MIN_RANGE=5\nACCEPTABLE_Y_DIFFERENCE=30\n# Acceleration of extruder tip in mm/s^2\nACCELERATION = 6000\n# Used to adjust calculated time of moves. Adaptively changes for each new video\nTIME_K = 1\nYOLO_PATH = 'src/YOLOv8/best2.onnx'\nMOBILE_PATH = 'src/MobileNetv3/mob_l_gmms2_finetune.onnx'\n\n# For temporal error correction\nTIME_TRAVEL_MIN_SIGNALS=5\nTIME_TRAVEL_MAX_DEVIATION=5 # in frames\n\n# For acceleration correction\nACCELERATION_SAMPLE_INTERVAL=10\nACCELERATION_MIN_STDEV=1\nACCELERATION_MIN_SIGNALS=20\n\n# For spatial error correction\nX_SPATIAL_MIN_SIGNALS=15\nX_SPATIAL_MAX_DEVIATION=30\nY_SPATIAL_MIN_SIGNALS=5\nY_SPATIAL_MAX_DEVIATION=10\n\n# For slope change detection\nSLOPE_CHANGE_THRESHOLD=0.1\nRECENT_SLOPE_RANGE=1000\nRECENT_SLOPE_SAMPLE_INTERVAL=100\nSLOPE_CHANGE_SENSITIVITY=0.03"
+}

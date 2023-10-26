@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/examples/data_connectors/GithubRepositoryReaderDemo.html",
+        "title": "Github Repo Reader - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## Github Repo Reader[\uf0c1](#github-repo-reader \"Permalink to this heading\")\n\n\\# This is due to the fact that we use asyncio.loop\\_until\\_complete in\n\\# the DiscordReader. Since the Jupyter kernel itself runs on\n\\# an event loop, we need to add some help with nesting\n!pip install nest\\_asyncio httpx\nimport nest\\_asyncio\n\nnest\\_asyncio.apply()\n\n%env OPENAI\\_API\\_KEY=sk-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\nfrom llama\\_index import VectorStoreIndex, GithubRepositoryReader\nfrom IPython.display import Markdown, display\nimport os\n\n%env GITHUB\\_TOKEN=github\\_pat\\_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\ngithub\\_token \\= os.environ.get(\"GITHUB\\_TOKEN\")\nowner \\= \"jerryjliu\"\nrepo \\= \"llama\\_index\"\nbranch \\= \"main\"\n\ndocuments \\= GithubRepositoryReader(\n    github\\_token\\=github\\_token,\n    owner\\=owner,\n    repo\\=repo,\n    use\\_parser\\=False,\n    verbose\\=False,\n    ignore\\_directories\\=\\[\"examples\"\\],\n).load\\_data(branch\\=branch)\n\nindex \\= VectorStoreIndex.from\\_documents(documents)\n\n\\# import time\n\\# for document in documents:\n\\#     print(document.metadata)\n\\#     time.sleep(.25)\nquery\\_engine \\= index.as\\_query\\_engine()\nresponse \\= query\\_engine.query(\n    \"What is the difference between VectorStoreIndex and SummaryIndex?\",\n    verbose\\=True,\n)\n\ndisplay(Markdown(f\"<b>{response}</b>\"))"
+}

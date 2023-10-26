@@ -1,0 +1,7 @@
+{
+    "metadata": {
+        "type": "repo",
+        "path": ".gitignore"
+    },
+    "text": "sidedata/\ndata/\nnotes.txt\ntest.py\n\n.DS_Store\n**/__pycache__/\n\nmy_constants.py\n\ntest/\n\nSTREAM_AI/\ntest.py\n\ntest_data/"
+}

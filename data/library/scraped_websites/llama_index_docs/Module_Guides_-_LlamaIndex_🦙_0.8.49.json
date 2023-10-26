@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/core_modules/query_modules/retriever/modules.html",
+        "title": "Module Guides - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "We are actively adding more tailored retrieval guides. In the meanwhile, please take a look at the [API References](https://docs.llamaindex.ai/en/stable/api_reference/query/retrievers.html).\n\n## Index Retrievers[\uf0c1](#index-retrievers \"Permalink to this heading\")\n\nPlease see [the retriever modes](https://docs.llamaindex.ai/en/stable/core_modules/query_modules/retriever/retriever_modes.html) for more details on how to get a retriever from any given index.\n\nIf you want to import the corresponding retrievers directly, please check out our [API reference](https://docs.llamaindex.ai/en/stable/api_reference/query/retrievers.html).\n\n## Advanced Retriever Guides[\uf0c1](#advanced-retriever-guides \"Permalink to this heading\")\n\nCheck out our comprehensive guides on various retriever modules, many of which cover advanced concepts (auto-retrieval, routing, ensembling, and more)."
+}

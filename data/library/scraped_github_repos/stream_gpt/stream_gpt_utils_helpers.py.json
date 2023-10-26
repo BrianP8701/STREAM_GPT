@@ -1,0 +1,7 @@
+{
+    "metadata": {
+        "type": "repo",
+        "path": "stream_gpt/utils/helpers.py"
+    },
+    "text": "import tiktoken\n\ndef num_tokens_from_messages(messages, model=\"gpt-3.5-turbo-0613\"):\n    \"\"\"Returns the number of tokens used by a list of messages.\"\"\"\n    try:\n        encoding = tiktoken.encoding_for_model(model)\n    except KeyError:\n        encoding = tiktoken.get_encoding(\"cl100k_base\")\n    num_tokens = 0\n    for message in messages:\n        num_tokens += 4  # every message follows <im_start>{role/name}\\n{content}<im_end>\\n\n        for key, value in message.items():\n            num_tokens += len(encoding.encode(value))\n            if key == \"name\":  # if there's a name, the role is omitted\n                num_tokens += -1  # role is always required and always 1 token\n    num_tokens += 2  # every reply is primed with <im_start>assistant\n    return num_tokens\n\ndef concatenate_with_indices(string_list):\n    '''\n    Concatenates a list of strings, separating them with four new lines and \n    prefixing each with its index in the format '<Category n>'.\n\n    Args:\n    - string_list (list of str): The list of strings to concatenate.\n\n    Returns:\n    - str: The concatenated string with indices and newline separations.\n    '''\n    result = \"\"\n    for index, string in enumerate(string_list):\n        result += f'<Category {index}>\\n{string}\\n\\n\\n\\n'\n    return result"
+}

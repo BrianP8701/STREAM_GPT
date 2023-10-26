@@ -1,0 +1,7 @@
+{
+    "metadata": {
+        "type": "repo",
+        "path": "stream_gpt/interfaces/scraper_interface.py"
+    },
+    "text": "from abc import ABC, abstractmethod\n\nclass Scraper(ABC):\n    def scrape():\n        pass\n    \n    @abstractmethod\n    def convert_scraped_data_to_documents():\n        '''\n        The fudamental unit of data used in STREAM-GPT is the Document.\n        '''\n        pass"
+}

@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/api_reference/query/query_engines/transform_query_engine.html",
+        "title": "Transform Query Engine - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## Transform Query Engine[\uf0c1](#module-llama_index.query_engine.transform_query_engine \"Permalink to this heading\")\n\n_class_ llama\\_index.query\\_engine.transform\\_query\\_engine.TransformQueryEngine(_query\\_engine: BaseQueryEngine_, _query\\_transform: BaseQueryTransform_, _transform\\_metadata: Optional\\[dict\\] \\= None_, _callback\\_manager: Optional\\[[CallbackManager](https://docs.llamaindex.ai/en/stable/api_reference/callbacks.html#llama_index.callbacks.CallbackManager \"llama_index.callbacks.base.CallbackManager\")\\] \\= None_)[\uf0c1](#llama_index.query_engine.transform_query_engine.TransformQueryEngine \"Permalink to this definition\")\n\nTransform query engine.\n\nApplies a query transform to a query bundle before passing\n\nit to a query engine.\n\nParameters\n\n*   **query\\_engine** (_BaseQueryEngine_) \u2013 A query engine object.\n    \n*   **query\\_transform** (_BaseQueryTransform_) \u2013 A query transform object.\n    \n*   **transform\\_metadata** (_Optional__\\[__dict__\\]_) \u2013 metadata to pass to the query transform.\n    \n*   **callback\\_manager** (_Optional__\\[_[_CallbackManager_](https://docs.llamaindex.ai/en/stable/api_reference/callbacks.html#llama_index.callbacks.CallbackManager \"llama_index.callbacks.CallbackManager\")_\\]_) \u2013 A callback manager."
+}

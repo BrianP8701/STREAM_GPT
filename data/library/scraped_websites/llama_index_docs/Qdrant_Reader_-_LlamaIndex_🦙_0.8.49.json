@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/examples/data_connectors/QdrantDemo.html",
+        "title": "Qdrant Reader - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## Qdrant Reader[\uf0c1](#qdrant-reader \"Permalink to this heading\")\n\nimport logging\nimport sys\n\nlogging.basicConfig(stream\\=sys.stdout, level\\=logging.INFO)\nlogging.getLogger().addHandler(logging.StreamHandler(stream\\=sys.stdout))\n\nfrom llama\\_index.readers.qdrant import QdrantReader\n\nreader \\= QdrantReader(host\\=\"localhost\")\n\n\\# the query\\_vector is an embedding representation of your query\\_vector\n\\# Example query vector:\n\\#   query\\_vector=\\[0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3, 0.3\\]\n\nquery\\_vector \\= \\[n1, n2, n3, ...\\]\n\n\\# NOTE: Required args are collection\\_name, query\\_vector.\n\\# See the Python client: https://github.com/qdrant/qdrant\\_client\n\\# for more details.\ndocuments \\= reader.load\\_data(\n    collection\\_name\\=\"demo\", query\\_vector\\=query\\_vector, limit\\=5\n)\n\n## Create index[\uf0c1](#create-index \"Permalink to this heading\")\n\nindex \\= SummaryIndex.from\\_documents(documents)\n\n\\# set Logging to DEBUG for more detailed outputs\nquery\\_engine \\= index.as\\_query\\_engine()\nresponse \\= query\\_engine.query(\"<query\\_text>\")\n\ndisplay(Markdown(f\"<b>{response}</b>\"))"
+}

@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/community/integrations/trulens.html",
+        "title": "Evaluating and Tracking with TruLens - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\nThis page covers how to use [TruLens](https://trulens.org/) to evaluate and track LLM apps built on Llama-Index.\n\n## What is TruLens?[\uf0c1](#what-is-trulens \"Permalink to this heading\")\n\nTruLens is an [opensource](https://github.com/truera/trulens) package that provides instrumentation and evaluation tools for large language model (LLM) based applications. This includes feedback function evaluations of relevance, sentiment and more, plus in-depth tracing including cost and latency.\n\n![TruLens Architecture](https://www.trulens.org/Assets/image/TruLens_Architecture.png)\n\nAs you iterate on new versions of your LLM application, you can compare their performance across all of the different quality metrics you\u2019ve set up. You\u2019ll also be able to view evaluations at a record level, and explore the app metadata for each record.\n\n### Installation and Setup[\uf0c1](#installation-and-setup \"Permalink to this heading\")\n\nAdding TruLens is simple, just install it from pypi!\n\nfrom trulens\\_eval import TruLlama"
+}

@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/examples/data_connectors/NotionDemo.html",
+        "title": "Notion Reader - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## Notion Reader[\uf0c1](#notion-reader \"Permalink to this heading\")\n\nDemonstrates our Notion data connector\n\nimport logging\nimport sys\n\nlogging.basicConfig(stream\\=sys.stdout, level\\=logging.INFO)\nlogging.getLogger().addHandler(logging.StreamHandler(stream\\=sys.stdout))\n\nfrom llama\\_index import SummaryIndex, NotionPageReader\nfrom IPython.display import Markdown, display\nimport os\n\nintegration\\_token \\= os.getenv(\"NOTION\\_INTEGRATION\\_TOKEN\")\npage\\_ids \\= \\[\"<page\\_id>\"\\]\ndocuments \\= NotionPageReader(integration\\_token\\=integration\\_token).load\\_data(\n    page\\_ids\\=page\\_ids\n)\n\nindex \\= SummaryIndex.from\\_documents(documents)\n\n\\# set Logging to DEBUG for more detailed outputs\nquery\\_engine \\= index.as\\_query\\_engine()\nresponse \\= query\\_engine.query(\"<query\\_text>\")\n\ndisplay(Markdown(f\"<b>{response}</b>\"))\n\nYou can also pass the id of a database to index all the pages in that database:\n\ndatabase\\_id \\= \"<database-id>\"\n\n\\# https://developers.notion.com/docs/working-with-databases for how to find your database id\n\ndocuments \\= NotionPageReader(integration\\_token\\=integration\\_token).load\\_data(\n    database\\_id\\=database\\_id\n)\n\nprint(documents)\n\n\\# set Logging to DEBUG for more detailed outputs\nindex \\= SummaryIndex.from\\_documents(documents)\nquery\\_engine \\= index.as\\_query\\_engine()\nresponse \\= query\\_engine.query(\"<query\\_text>\")\ndisplay(Markdown(f\"<b>{response}</b>\"))"
+}

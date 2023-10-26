@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/api_reference/query/query_bundle.html",
+        "title": "Query Bundle - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## Query Bundle[\uf0c1](#module-llama_index.indices.query.schema \"Permalink to this heading\")\n\nQuery Schema.\n\nThis schema is used under the hood for all queries, but is primarily exposed for recursive queries over composable indices.\n\n_class_ llama\\_index.indices.query.schema.QueryBundle(_query\\_str: str_, _custom\\_embedding\\_strs: Optional\\[List\\[str\\]\\] \\= None_, _embedding: Optional\\[List\\[float\\]\\] \\= None_)[\uf0c1](#llama_index.indices.query.schema.QueryBundle \"Permalink to this definition\")\n\nQuery bundle.\n\nThis dataclass contains the original query string and associated transformations.\n\nParameters\n\n*   **query\\_str** (_str_) \u2013 the original user-specified query string. This is currently used by all non embedding-based queries.\n    \n*   **embedding\\_strs** (_list__\\[__str__\\]_) \u2013 list of strings used for embedding the query. This is currently used by all embedding-based queries.\n    \n*   **embedding** (_list__\\[__float__\\]_) \u2013 the stored embedding for the query.\n    \n\n_property_ embedding\\_strs_: List\\[str\\]_[\uf0c1](#llama_index.indices.query.schema.QueryBundle.embedding_strs \"Permalink to this definition\")\n\nUse custom embedding strs if specified, otherwise use query str."
+}

@@ -1,0 +1,7 @@
+{
+    "metadata": {
+        "type": "repo",
+        "path": "stream_gpt/knowledge_tree/tree/chunk_text.py"
+    },
+    "text": "def basic_chunk_text(text, chunk_char_size=4000):\n    '''\n        This method breaks your text into chunks of chunk_char_size with 10% overlap.\n\n        Args:\n        - text   (string): The actual text you want to be saved in the tree\n        - prompt (string): Describe how you want the text to be saved in the tree\n\n        Returns:\n        - chunks (list): List of chunks of text\n    '''\n    overlap_size = int(chunk_char_size * 0.10)\n    chunks = []\n    start_idx = 0\n\n    while start_idx < len(text):\n        end_idx = start_idx + chunk_char_size\n        chunks.append(text[start_idx:end_idx])\n        start_idx += (chunk_char_size - overlap_size)  # Move start index forward, less the overlap\n\n    return chunks"
+}

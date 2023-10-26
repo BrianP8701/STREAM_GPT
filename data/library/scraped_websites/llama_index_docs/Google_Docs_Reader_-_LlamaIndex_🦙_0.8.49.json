@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/examples/data_connectors/GoogleDocsDemo.html",
+        "title": "Google Docs Reader - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## Google Docs Reader[\uf0c1](#google-docs-reader \"Permalink to this heading\")\n\nDemonstrates our Google Docs data connector\n\nimport logging\nimport sys\n\nlogging.basicConfig(stream\\=sys.stdout, level\\=logging.INFO)\nlogging.getLogger().addHandler(logging.StreamHandler(stream\\=sys.stdout))\n\nfrom llama\\_index import SummaryIndex, GoogleDocsReader\nfrom IPython.display import Markdown, display\nimport os\n\n\\# make sure credentials.json file exists\ndocument\\_ids \\= \\[\"<document\\_id>\"\\]\ndocuments \\= GoogleDocsReader().load\\_data(document\\_ids\\=document\\_ids)\n\nindex \\= SummaryIndex.from\\_documents(documents)\n\n\\# set Logging to DEBUG for more detailed outputs\nquery\\_engine \\= index.as\\_query\\_engine()\nresponse \\= query\\_engine.query(\"<query\\_text>\")\n\ndisplay(Markdown(f\"<b>{response}</b>\"))"
+}

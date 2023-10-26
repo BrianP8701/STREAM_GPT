@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/examples/vector_stores/OpensearchDemo.html",
+        "title": "Opensearch Vector Store - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "'\\\\n\\\\nThe author grew up writing short stories, programming on an IBM 1401, and building a computer kit from Heathkit. They also wrote programs for a TRS-80, such as games, a program to predict model rocket flight, and a word processor. After years of nagging, they convinced their father to buy a TRS-80, and they wrote simple games, a program to predict how high their model rockets would fly, and a word processor that their father used to write at least one book. In college, they studied philosophy and AI, and wrote a book about Lisp hacking. They also took art classes and applied to art schools, and experimented with computer graphics and animation, exploring the use of algorithms to create art. Additionally, they experimented with machine learning algorithms, such as using neural networks to generate art, and exploring the use of numerical values to create art. They also took classes in fundamental subjects like drawing, color, and design, and applied to two art schools, RISD in the US, and the Accademia di Belli Arti in Florence. They were accepted to RISD, and while waiting to hear back from the Accademia, they learned Italian and took the entrance exam in Florence. They eventually graduated from RISD'"
+}

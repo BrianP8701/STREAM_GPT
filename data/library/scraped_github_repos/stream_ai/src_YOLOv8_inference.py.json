@@ -1,0 +1,7 @@
+{
+    "metadata": {
+        "type": "repo",
+        "path": "src/YOLOv8/inference.py"
+    },
+    "text": "import cv2\nimport sys\nimport os\nsys.path.append(os.path.dirname(os.path.abspath(__file__)))\nfrom yolo_v8.YOLOv8 import YOLOv8\n\nclass Inference:\n    def __init__(self, model_path) -> None:\n        self.model_path = model_path\n        self.yolov8_detector = YOLOv8(model_path, conf_thres=0.5, iou_thres=0.3)\n\n    def predict(self, img):\n        boxes, scores, class_ids = self.yolov8_detector(img)\n        if(len(boxes) == 0):\n            boxes = [-1,-1,-1,-1]\n        else:\n            boxes = boxes[0]\n        return [int(x) for x in boxes]\n\nif __name__ == \"__main__\":\n    inf = Inference(\"inference_/best.onnx\")\n    img = cv2.imread(\"/Users/brianprzezdziecki/Research/Mechatronics/STREAM Tip Detection.v1i.yolov7pytorch/train/images/frame0-2_jpg.rf.7b747ceadcc5769eb532d29d9d9eb200.jpg\")\n    print(img.shape)\n    box = inf.predict(img)\n    print(box)"
+}

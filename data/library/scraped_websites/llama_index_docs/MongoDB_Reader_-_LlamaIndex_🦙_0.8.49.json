@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/examples/data_connectors/MongoDemo.html",
+        "title": "MongoDB Reader - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## MongoDB Reader[\uf0c1](#mongodb-reader \"Permalink to this heading\")\n\nDemonstrates our MongoDB data connector\n\nimport logging\nimport sys\n\nlogging.basicConfig(stream\\=sys.stdout, level\\=logging.INFO)\nlogging.getLogger().addHandler(logging.StreamHandler(stream\\=sys.stdout))\n\nfrom llama\\_index import SummaryIndex, SimpleMongoReader\nfrom IPython.display import Markdown, display\nimport os\n\nhost \\= \"<host>\"\nport \\= \"<port>\"\ndb\\_name \\= \"<db\\_name>\"\ncollection\\_name \\= \"<collection\\_name>\"\n\\# query\\_dict is passed into db.collection.find()\nquery\\_dict \\= {}\nfield\\_names \\= \\[\"text\"\\]\nreader \\= SimpleMongoReader(host, port)\ndocuments \\= reader.load\\_data(\n    db\\_name, collection\\_name, field\\_names, query\\_dict\\=query\\_dict\n)\n\nindex \\= SummaryIndex.from\\_documents(documents)\n\n\\# set Logging to DEBUG for more detailed outputs\nquery\\_engine \\= index.as\\_query\\_engine()\nresponse \\= query\\_engine.query(\"<query\\_text>\")\n\ndisplay(Markdown(f\"<b>{response}</b>\"))"
+}

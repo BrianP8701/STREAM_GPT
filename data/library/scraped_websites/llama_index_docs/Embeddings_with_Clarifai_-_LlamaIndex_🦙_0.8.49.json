@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/examples/embeddings/clarifai.html",
+        "title": "Embeddings with Clarifai - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## Embeddings with Clarifai[\uf0c1](#embeddings-with-clarifai \"Permalink to this heading\")\n\nLlamaIndex has support for Clarifai embeddings models.\n\nYou must have a Clarifai account and a Personal Access Token (PAT) key. [Check here](https://clarifai.com/settings/security) to get or create a PAT.\n\nSet CLARIFAI\\_PAT as an environment variable.\n\n!export CLARIFAI\\_PAT=YOUR\\_KEY\n\nModels can be referenced either by the full URL or by the model\\_name, user ID, and app ID combination.\n\nfrom llama\\_index.embeddings import ClarifaiEmbedding\n\nembed\\_model \\= ClarifaiEmbedding(\n    model\\_url\\=\"https://clarifai.com/clarifai/main/models/BAAI-bge-base-en\"\n)\n\n\\# Alternatively\nembed\\_model \\= ClarifaiEmbedding(\n    model\\_name\\=\"BAAI-bge-base-en\", user\\_id\\=\"clarifai\", app\\_id\\=\"main\"\n)\n\nembeddings \\= embed\\_model.get\\_text\\_embedding(\"Hello World!\")\nprint(len(embeddings))\nprint(embeddings\\[:5\\])"
+}

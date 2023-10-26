@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/examples/data_connectors/SlackDemo.html",
+        "title": "Slack Reader - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## Slack Reader[\uf0c1](#slack-reader \"Permalink to this heading\")\n\nDemonstrates our Slack data connector\n\nimport logging\nimport sys\n\nlogging.basicConfig(stream\\=sys.stdout, level\\=logging.INFO)\nlogging.getLogger().addHandler(logging.StreamHandler(stream\\=sys.stdout))\n\nfrom llama\\_index import SummaryIndex, SlackReader\nfrom IPython.display import Markdown, display\nimport os\n\nslack\\_token \\= os.getenv(\"SLACK\\_BOT\\_TOKEN\")\nchannel\\_ids \\= \\[\"<channel\\_id>\"\\]\ndocuments \\= SlackReader(slack\\_token\\=slack\\_token).load\\_data(\n    channel\\_ids\\=channel\\_ids\n)\n\nindex \\= SummaryIndex.from\\_documents(documents)\n\n\\# set Logging to DEBUG for more detailed outputs\nquery\\_engine \\= index.as\\_query\\_engine()\nresponse \\= query\\_engine.query(\"<query\\_text>\")\n\ndisplay(Markdown(f\"<b>{response}</b>\"))"
+}

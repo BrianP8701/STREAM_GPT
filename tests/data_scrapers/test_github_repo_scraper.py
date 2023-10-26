@@ -5,8 +5,8 @@ import pytest
 
 @pytest.mark.skip(reason="Already tested")
 def test_github_repo_scraper():
-    Repo_Scraper = RepoScraper(GITHUB_KEY)
+    repo_scraper = RepoScraper(GITHUB_KEY)
     REPO_URL = 'https://github.com/BrianP8701/STREAM.AI'
-    documents = Repo_Scraper.scrape(REPO_URL)
+    documents = repo_scraper.scrape(REPO_URL)
     for document in documents:
         document.save_to_file('data/test/')

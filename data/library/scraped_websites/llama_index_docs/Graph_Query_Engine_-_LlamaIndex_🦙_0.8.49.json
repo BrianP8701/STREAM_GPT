@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/api_reference/query/query_engines/graph_query_engine.html",
+        "title": "Graph Query Engine - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## Graph Query Engine[\uf0c1](#module-llama_index.query_engine.graph_query_engine \"Permalink to this heading\")\n\n_class_ llama\\_index.query\\_engine.graph\\_query\\_engine.ComposableGraphQueryEngine(_graph: [ComposableGraph](https://docs.llamaindex.ai/en/stable/api_reference/composability.html#llama_index.composability.ComposableGraph \"llama_index.indices.composability.graph.ComposableGraph\")_, _custom\\_query\\_engines: Optional\\[Dict\\[str, BaseQueryEngine\\]\\] \\= None_, _recursive: bool \\= True_, _\\*\\*kwargs: Any_)[\uf0c1](#llama_index.query_engine.graph_query_engine.ComposableGraphQueryEngine \"Permalink to this definition\")\n\nComposable graph query engine.\n\nThis query engine can operate over a ComposableGraph. It can take in custom query engines for its sub-indices.\n\nParameters\n\n*   **graph** ([_ComposableGraph_](https://docs.llamaindex.ai/en/stable/api_reference/composability.html#llama_index.composability.ComposableGraph \"llama_index.composability.ComposableGraph\")) \u2013 A ComposableGraph object.\n    \n*   **custom\\_query\\_engines** (_Optional__\\[__Dict__\\[__str__,_ _BaseQueryEngine__\\]__\\]_) \u2013 A dictionary of custom query engines.\n    \n*   **recursive** (_bool_) \u2013 Whether to recursively query the graph.\n    \n*   **\\*\\*kwargs** \u2013 additional arguments to be passed to the underlying index query engine."
+}

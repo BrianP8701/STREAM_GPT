@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/examples/embeddings/Langchain.html",
+        "title": "Langchain Embeddings - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## Langchain Embeddings[\uf0c1](#langchain-embeddings \"Permalink to this heading\")\n\nfrom langchain.embeddings import HuggingFaceEmbeddings\nfrom llama\\_index import ServiceContext, set\\_global\\_service\\_context\n\nembed\\_model \\= HuggingFaceEmbeddings(\n    model\\_name\\=\"sentence-transformers/all-mpnet-base-v2\"\n)\n\nservice\\_context \\= ServiceContext.from\\_defaults(embed\\_model\\=embed\\_model)\n\n\\# optionally set a global service context\nset\\_global\\_service\\_context(service\\_context)"
+}

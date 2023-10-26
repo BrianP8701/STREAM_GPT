@@ -1,0 +1,7 @@
+{
+    "metadata": {
+        "type": "repo",
+        "path": "tests/data_scrapers/test_github_repo_scraper.py"
+    },
+    "text": "from stream_gpt.data_scrapers.github_repo_scraper import RepoScraper\nfrom stream_gpt.constants.keys import GITHUB_KEY\nimport json\nimport pytest\n\n@pytest.mark.skip(reason=\"Already tested\")\ndef test_github_repo_scraper():\n    Repo_Scraper = RepoScraper(GITHUB_KEY)\n    REPO_URL = 'https://github.com/BrianP8701/STREAM.AI'\n    documents = Repo_Scraper.scrape(REPO_URL)\n    for document in documents:\n        document.save_to_file('data/test/')"
+}

@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/examples/embeddings/text_embedding_inference.html",
+        "title": "Text Embedding Inference - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "Toggle table of contents sidebar\n\n## Text Embedding Inference[\uf0c1](#text-embedding-inference \"Permalink to this heading\")\n\nThis notebook demonstrates how to configure `TextEmbeddingInference` embeddings.\n\nThe first step is to deploy the embeddings server. For detailed instructions, see the [official repository for Text Embeddings Inference](https://github.com/huggingface/text-embeddings-inference).\n\nOnce deployed, the code below will connect to and submit embeddings for inference.\n\nfrom llama\\_index.embeddings import TextEmbeddingsInference\n\nembed\\_model \\= TextEmbeddingsInference(\n    model\\_name\\=\"BAAI/bge-large-en-v1.5\",  \\# required for formatting inference text,\n    timeout\\=60,  \\# timeout in seconds\n    embed\\_batch\\_size\\=10,  \\# batch size for embedding\n)\n\nembeddings \\= embed\\_model.get\\_text\\_embedding(\"Hello World!\")\nprint(len(embeddings))\nprint(embeddings\\[:5\\])\n\n1024\n\\[0.010597229, 0.05895996, 0.022445679, -0.012046814, -0.03164673\\]\n\nembeddings \\= await embed\\_model.aget\\_text\\_embedding(\"Hello World!\")\nprint(len(embeddings))\nprint(embeddings\\[:5\\])\n\n1024\n\\[0.010597229, 0.05895996, 0.022445679, -0.012046814, -0.03164673\\]"
+}

@@ -19,9 +19,9 @@ class Document:
         
         if self.metadata['type']=='pdf':
             file_path = os.path.join(path, self.metadata['title'].replace('/', '_').replace(' ', '_')) + '.json'
-        elif self.metadata['type']=='github_repo':
+        elif self.metadata['type']=='repo':
             file_path = os.path.join(path + self.metadata['path'].replace('/', '_').replace(' ', '_')) + '.json'
-        elif self.metadata['type']=='website':
+        elif self.metadata['type']=='web':
             file_path = os.path.join(path + self.metadata['title'].replace('/', '_').replace(' ', '_')) + '.json'
         else:
             raise Exception(f'Invalid document type: {self.metadata["type"]}')

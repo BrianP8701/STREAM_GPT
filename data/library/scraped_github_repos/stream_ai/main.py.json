@@ -1,0 +1,7 @@
+{
+    "metadata": {
+        "type": "repo",
+        "path": "main.py"
+    },
+    "text": "from src.threads.Tracker import Tracker\n\nvideo_path = 'data/video/Run78.mov'\ngcode_path = 'data/gcode/TEST_8_13_1_08.gcode'\nsignals_path = 'data/signal/Run78P_0626.txt'\njson_path = 'data/metrics/run2.json'\n\ntracker = Tracker(video_path, gcode_path, signals_path, json_path, display_video=True, save_video=False, resolution_percentage=40)\ntracker.start()"
+}

@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/examples/embeddings/elasticsearch.html",
+        "title": "Elasticsearch Embeddings - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## Elasticsearch Embeddings[\uf0c1](#elasticsearch-embeddings \"Permalink to this heading\")\n\n\\# imports\n\nfrom llama\\_index.embeddings.elasticsearch import ElasticsearchEmbeddings\nfrom llama\\_index.vector\\_stores import ElasticsearchStore\nfrom llama\\_index import ServiceContext, StorageContext, VectorStoreIndex\n\n\\# get credentials and create embeddings\n\nimport os\n\nhost \\= os.environ.get(\"ES\\_HOST\", \"localhost:9200\")\nusername \\= os.environ.get(\"ES\\_USERNAME\", \"elastic\")\npassword \\= os.environ.get(\"ES\\_PASSWORD\", \"changeme\")\nindex\\_name \\= os.environ.get(\"INDEX\\_NAME\", \"your-index-name\")\nmodel\\_id \\= os.environ.get(\"MODEL\\_ID\", \"your-model-id\")\n\nembeddings \\= ElasticsearchEmbeddings.from\\_credentials(\n    model\\_id\\=model\\_id, es\\_url\\=host, es\\_username\\=username, es\\_password\\=password\n)\n\n\\# create service context using the embeddings\n\nservice\\_context \\= ServiceContext(embed\\_model\\=embeddings, chunk\\_size\\=512)\n\n\\# usage with elasticsearch vector store\n\nvector\\_store \\= ElasticsearchStore(\n    index\\_name\\=index\\_name, es\\_url\\=host, es\\_user\\=username, es\\_password\\=password\n)\n\nstorage\\_context \\= StorageContext.from\\_defaults(vector\\_store\\=vector\\_store)\n\nindex \\= VectorStoreIndex.from\\_vector\\_store(\n    vector\\_store\\=vector\\_store,\n    storage\\_context\\=storage\\_context,\n    service\\_context\\=service\\_context,\n)\n\nquery\\_engine \\= index.as\\_query\\_engine()\n\nresponse \\= query\\_engine.query(\"hello world\")"
+}

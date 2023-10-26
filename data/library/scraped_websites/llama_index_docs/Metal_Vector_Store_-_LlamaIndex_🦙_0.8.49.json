@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/examples/vector_stores/MetalIndexDemo.html",
+        "title": "Metal Vector Store - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "## Load data into your Index[\uf0c1](#load-data-into-your-index \"Permalink to this heading\")\n\nimport logging\nimport sys\n\nlogging.basicConfig(stream\\=sys.stdout, level\\=logging.INFO)\nlogging.getLogger().addHandler(logging.StreamHandler(stream\\=sys.stdout))\n\nfrom llama\\_index import VectorStoreIndex, SimpleDirectoryReader\nfrom llama\\_index.vector\\_stores import MetalVectorStore\nfrom IPython.display import Markdown, display\n\n\\# load documents\ndocuments \\= SimpleDirectoryReader(\"../paul\\_graham\\_essay/data\").load\\_data()\n\n\\# initialize Metal Vector Store\nfrom llama\\_index.storage.storage\\_context import StorageContext\n\napi\\_key \\= \"api key\"\nclient\\_id \\= \"client id\"\nindex\\_id \\= \"index id\"\n\nvector\\_store \\= MetalVectorStore(\n    api\\_key\\=api\\_key,\n    client\\_id\\=client\\_id,\n    index\\_id\\=index\\_id,\n)\nstorage\\_context \\= StorageContext.from\\_defaults(vector\\_store\\=vector\\_store)\nindex \\= VectorStoreIndex.from\\_documents(\n    documents, storage\\_context\\=storage\\_context\n)"
+}

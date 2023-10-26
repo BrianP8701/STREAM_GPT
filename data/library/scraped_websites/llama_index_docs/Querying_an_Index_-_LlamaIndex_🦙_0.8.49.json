@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/api_reference/query.html",
+        "title": "Querying an Index - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## Querying an Index[\uf0c1](#querying-an-index \"Permalink to this heading\")\n\nThis doc shows the classes that are used to query indices.\n\n## Main Query Classes[\uf0c1](#main-query-classes \"Permalink to this heading\")\n\nQuerying an index involves a three main components:\n\n*   **Retrievers**: A retriever class retrieves a set of Nodes from an index given a query.\n    \n*   **Response Synthesizer**: This class takes in a set of Nodes and synthesizes an answer given a query.\n    \n*   **Query Engine**: This class takes in a query and returns a Response object. It can make use of Retrievers and Response Synthesizer modules under the hood.\n    \n*   **Chat Engines**: This class enables conversation over a knowledge base. It is the stateful version of a query engine that keeps track of conversation history.\n    \n\n## Additional Query Classes[\uf0c1](#additional-query-classes \"Permalink to this heading\")\n\nWe also detail some additional query classes below.\n\n*   **Query Bundle**: This is the input to the query classes: retriever, response synthesizer,\n    \n    and query engine. It enables the user to customize the string(s) used for embedding-based query.\n    \n*   **Query Transform**: This class augments a raw query string with\n    \n    associated transformations to improve index querying. Can be used with a Retriever (see TransformRetriever) or QueryEngine."
+}

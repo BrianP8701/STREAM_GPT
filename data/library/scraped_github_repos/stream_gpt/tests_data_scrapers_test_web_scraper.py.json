@@ -1,0 +1,7 @@
+{
+    "metadata": {
+        "type": "repo",
+        "path": "tests/data_scrapers/test_web_scraper.py"
+    },
+    "text": "import pytest\nimport json\nfrom stream_gpt.data_scrapers.web_scraper import WebScraper\nfrom stream_gpt.constants.keys import APIFY_KEY\n\n@pytest.mark.skip(reason=\"Already tested\")\ndef test_web_scraper():\n    Web_Scraper = WebScraper(APIFY_KEY)\n    scraped_data = Web_Scraper.scrape('https://platform.openai.com/docs/introduction')\n    for document in scraped_data:\n        document.save_to_file('data/test/')"
+}

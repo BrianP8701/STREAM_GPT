@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/core_modules/query_modules/query_engine/root.html",
+        "title": "Query Engine - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "## Concept[\uf0c1](#concept \"Permalink to this heading\")\n\nQuery engine is a generic interface that allows you to ask question over your data.\n\nA query engine takes in a natural language query, and returns a rich response. It is most often (but not always) built on one or many [Indices](https://docs.llamaindex.ai/en/stable/core_modules/data_modules/index/root.html) via [Retrievers](https://docs.llamaindex.ai/en/stable/core_modules/query_modules/retriever/root.html). You can compose multiple query engines to achieve more advanced capability.\n\nTip\n\nIf you want to have a conversation with your data (multiple back-and-forth instead of a single question & answer), take a look at [Chat Engine](https://docs.llamaindex.ai/en/stable/core_modules/query_modules/chat_engines/root.html)"
+}

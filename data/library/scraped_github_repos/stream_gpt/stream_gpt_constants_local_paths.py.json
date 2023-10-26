@@ -1,0 +1,7 @@
+{
+    "metadata": {
+        "type": "repo",
+        "path": "stream_gpt/constants/local_paths.py"
+    },
+    "text": "CHROME_DRIVER = '/Users/brianprzezdziecki/Downloads/chromedriver-mac-arm64/chromedriver'"
+}

@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://platform.openai.com/docs/tutorials",
+        "title": "Tutorials - OpenAI API",
+        "description": "Explore resources, tutorials, API docs, and dynamic examples to get the most out of OpenAI's developer platform."
+    },
+    "text": "[](https://platform.openai.com/docs/tutorials/tutorials)\n\n## [Tutorials](https://platform.openai.com/docs/tutorials/tutorials)\n\nGet started with the OpenAI API by building real AI apps step by step.\n\n[\n\nWebsite Q&A with Embeddings\n\nLearn how to build an AI that can answer questions about your website.\n\n\n\n](https://platform.openai.com/docs/tutorials/web-qa-embeddings)[\n\nMeeting minutes transcription with Whisper\n\nLearn how to create an automated meeting minutes generator with Whisper and GPT-4.\n\n\n\n](https://platform.openai.com/docs/tutorials/meeting-minutes)[\n\nComing soon\n\nLearn how to build and deploy an AI chat bot that understands multiple knowledge bases.\n\n\n\n](https://platform.openai.com/docs/tutorials/)\n\n* * *\n\nLooking for more ideas? Check out our [Examples gallery](https://platform.openai.com/examples) or the [OpenAI Cookbook](https://cookbook.openai.com/) on GitHub."
+}

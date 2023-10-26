@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/examples/embeddings/llm_rails.html",
+        "title": "LLMRails Embeddings - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## LLMRails Embeddings[\uf0c1](#llmrails-embeddings \"Permalink to this heading\")\n\n\\# imports\n\nfrom llama\\_index.embeddings.llm\\_rails import LLMRailsEmbeddings\n\n\\# get credentials and create embeddings\n\nimport os\n\napi\\_key \\= os.environ.get(\"API\\_KEY\", \"your-api-key\")\nmodel\\_id \\= os.environ.get(\"MODEL\\_ID\", \"your-model-id\")\n\nembed\\_model \\= LLMRailsEmbeddings(model\\_id\\=model\\_id, api\\_key\\=api\\_key)\n\nembeddings \\= embed\\_model.get\\_text\\_embedding(\n    \"It is raining cats and dogs here!\"\n)"
+}

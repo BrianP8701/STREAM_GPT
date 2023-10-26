@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/end_to_end_tutorials/apps.html",
+        "title": "Full-Stack Web Application - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "## Full-Stack Web Application[\uf0c1](#full-stack-web-application \"Permalink to this heading\")\n\nLlamaIndex can be integrated into a downstream full-stack web application. It can be used in a backend server (such as Flask), packaged into a Docker container, and/or directly used in a framework such as Streamlit.\n\nWe provide tutorials and resources to help you get started in this area.\n\nRelevant Resources:\n\n*   [Fullstack Application Guide](https://docs.llamaindex.ai/en/stable/end_to_end_tutorials/apps/fullstack_app_guide.html)\n    \n*   [Fullstack Application with Delphic](https://docs.llamaindex.ai/en/stable/end_to_end_tutorials/apps/fullstack_with_delphic.html)\n    \n*   [A Guide to Extracting Terms and Definitions](https://docs.llamaindex.ai/en/stable/end_to_end_tutorials/question_and_answer/terms_definitions_tutorial.html)\n    \n*   [LlamaIndex Starter Pack](https://github.com/logan-markewich/llama_index_starter_pack)"
+}

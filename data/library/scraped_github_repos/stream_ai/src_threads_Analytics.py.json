@@ -1,0 +1,7 @@
+{
+    "metadata": {
+        "type": "repo",
+        "path": "src/threads/Analytics.py"
+    },
+    "text": "import src.helpers.helper_functions as helpers\nimport src.MobileNetv3.inference as Mobilenet\nimport src.helpers.preprocessing as preprocessing\nimport src.variables.global_vars as GV\n\nclass Analytics:\n    def __init__(self) :\n        pass\n    \n    # Runs MobileNet to get extrusion class\n    def get_extrusion_class(self, img):\n        extrusion_class = Mobilenet.run_onnx_inference(GV.ort_session, img)\n        return extrusion_class\n    \n    def transform_img(self, img):\n        img = Mobilenet.apply_transforms(img)\n        return img\n    \n    def apply_gmms(self, img):\n        img = preprocessing.gmms_preprocess_image(img, 6)\n        return img"
+}

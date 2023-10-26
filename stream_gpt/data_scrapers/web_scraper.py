@@ -70,7 +70,7 @@ class WebScraper(Scraper):
         documents = []
         for item in dataset_items:
             documents.append(Document(metadata={
-                'type': 'website', 
+                'type': 'web', 
                 'url': item['url'], 
                 'title': item['metadata']['title'], 
                 'description': item['metadata']['description']

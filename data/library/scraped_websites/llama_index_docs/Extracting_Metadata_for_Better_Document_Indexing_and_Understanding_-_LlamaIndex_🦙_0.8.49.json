@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/examples/metadata_extraction/MetadataExtractionSEC.html",
+        "title": "Extracting Metadata for Better Document Indexing and Understanding - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "**RESULT**: As we can see, the LLM answers the questions correctly.\n\n### Challenges Identified in the Problem Domain[\uf0c1](#challenges-identified-in-the-problem-domain \"Permalink to this heading\")\n\nIn this example, we observed that the search quality as provided by vector embeddings was rather poor. This was likely due to highly dense financial documents that were likely not representative of the training set for the model.\n\nIn order to improve the search quality, other methods of neural search that employ more keyword-based approaches may help, such as ColBERTv2/PLAID. In particular, this would help in matching on particular keywords to identify high-relevance chunks.\n\nOther valid steps may include utilizing models that are fine-tuned on financial datasets such as Bloomberg GPT.\n\nFinally, we can help to further enrich the metadata by providing more contextual information regarding the surrounding context that the chunk is located in.\n\n### Improvements to this Example[\uf0c1](#improvements-to-this-example \"Permalink to this heading\")\n\nGenerally, this example can be improved further with more rigorous evaluation of both the metadata extraction accuracy, and the accuracy and recall of the QnA pipeline. Further, incorporating a larger set of documents as well as the full length documents, which may provide more confounding passages that are difficult to disambiguate, could further stresss test the system we have built and suggest further improvements."
+}

@@ -1,0 +1,7 @@
+{
+    "metadata": {
+        "type": "repo",
+        "path": "pyproject.toml"
+    },
+    "text": "[tool.poetry]\nname = \"knowledge-tree\"\nversion = \"0.1.0\"\ndescription = \"\"\nauthors = [\"BrianP8701 <brianp8701@gmail.com>\"]\nreadme = \"README.md\"\n\n[tool.poetry.dependencies]\npython = \"^3.10\"\nopenai = \"^0.28.1\"\ntiktoken = \"^0.5.1\"\ngraphviz = \"^0.20.1\"\npdfplumber = \"^0.10.2\"\npdf2image = \"^1.16.3\"\npytesseract = \"^0.3.10\"\npypdf = \"^3.16.4\"\nbs4 = \"^0.0.1\"\nselenium = \"^4.14.0\"\napify-client = \"^1.5.0\"\n\n\n[tool.poetry.group.dev.dependencies]\npytest = \"^7.4.2\"\npytest-cov = \"^4.1.0\"\n\n[build-system]\nrequires = [\"poetry-core\"]\nbuild-backend = \"poetry.core.masonry.api\"\n"
+}

@@ -1,0 +1,9 @@
+{
+    "metadata": {
+        "type": "web",
+        "url": "https://docs.llamaindex.ai/en/stable/examples/data_connectors/MakeDemo.html",
+        "title": "Make Reader - LlamaIndex \ud83e\udd99 0.8.49",
+        "description": null
+    },
+    "text": "[Back to top](#)\n\nToggle table of contents sidebar\n\n## Make Reader[\uf0c1](#make-reader \"Permalink to this heading\")\n\nWe show how LlamaIndex can fit with your Make.com workflow by sending the GPT Index response to a scenario webhook.\n\nimport logging\nimport sys\n\nlogging.basicConfig(stream\\=sys.stdout, level\\=logging.INFO)\nlogging.getLogger().addHandler(logging.StreamHandler(stream\\=sys.stdout))\n\nfrom llama\\_index import VectorStoreIndex, SimpleDirectoryReader\nfrom llama\\_index.readers import MakeWrapper\n\ndocuments \\= SimpleDirectoryReader(\"../paul\\_graham\\_essay/data\").load\\_data()\nindex \\= VectorStoreIndex.from\\_documents(documents\\=documents)\n\n\\# set Logging to DEBUG for more detailed outputs\n\\# query index\nquery\\_str \\= \"What did the author do growing up?\"\nquery\\_engine \\= index.as\\_query\\_engine()\nresponse \\= query\\_engine.query(query\\_str)\n\n\\# Send response to Make.com webhook\nwrapper \\= MakeWrapper()\nwrapper.pass\\_response\\_to\\_webhook(\n    \"<webhook\\_url>,\n    response,\n    query\\_str\n)"
+}

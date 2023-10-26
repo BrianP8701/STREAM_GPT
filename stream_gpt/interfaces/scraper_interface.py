@@ -1,6 +1,9 @@
 from abc import ABC, abstractmethod
 
 class Scraper(ABC):
+    def scrape():
+        pass
+    
     @abstractmethod
     def convert_scraped_data_to_documents():
         '''

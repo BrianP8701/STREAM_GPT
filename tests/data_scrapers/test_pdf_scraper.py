@@ -1,14 +1,9 @@
-from stream_gpt.data_scrapers.pdf_scraper import pdfminer_scraper, pdf_to_text, pdfplumber_scraper, pypdf2_scraper, pytesseract_scraper
+from stream_gpt.data_scrapers.pdf_scraper import PDFScraper
 import json
 import pytest
 
 @pytest.mark.skip(reason="Already tested")
-def test_pdfminer_scraper():
-    text = pdfminer_scraper('data/raw_library/STREAM_Report.pdf')
-    assert len(text) > 0
-    with open('data/raw_library/STREAM_Report.json', 'w') as f:
-        json.dump(text, f)
-
-@pytest.mark.skip(reason="Already tested")
-def test_pdf_to_text():
-    text = pdf_to_text('data/raw_library/STREAM_Report.pdf')
+def test_pdf_scraper():
+    PDF_Scraper = PDFScraper()
+    document = PDF_Scraper.scrape('data/raw_library/STREAM_Report.pdf', metadata={'title':'STREAM Report'})
+    document.save_to_file('data/test/')
